@@ -26,7 +26,7 @@ const Header = () => {
         </div>
       </button>
 
-      <nav className="hidden md:flex space-x-8 text-sm font-medium text-gray-800">
+      <nav className="hidden md:flex space-x-8 text-m font-medium text-gray-800">
         <a href="about" className="hover:text-yellow-500 transition">About</a>
         <a href="contact" className="hover:text-yellow-500 transition">Contact</a>
       </nav>

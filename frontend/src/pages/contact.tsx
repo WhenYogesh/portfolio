@@ -30,12 +30,12 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F6F6F6] px-6 py-12 flex flex-col items-center justify-center">
-      <div className="max-w-3xl w-full text-center mb-10">
-        <h2 className="text-4xl md:text-5xl font-bold font-playfair text-gray-900 mb-4">
+    <div className="bg-[#F6F6F6] px-4 py-6 md:py-44 flex flex-col items-center justify-start">
+      <div className="max-w-3xl w-full text-center mb-6">
+        <h2 className="text-3xl md:text-5xl font-bold font-playfair text-gray-900 mb-3">
           Contact Me
         </h2>
-        <p className="text-gray-600 text-lg font-nunito">
+        <p className="text-gray-600 text-base md:text-lg font-nunito">
           Whether it’s about a project, job, or collaboration — I’d love to hear from you!
         </p>
       </div>
@@ -43,7 +43,7 @@ const Contact: React.FC = () => {
       <form
         ref={form}
         onSubmit={sendEmail}
-        className="w-full max-w-2xl bg-white p-8 rounded-xl shadow-lg space-y-6"
+        className="w-full max-w-2xl bg-white p-6 sm:p-8 rounded-xl shadow-lg space-y-6"
       >
         <div className="flex flex-col md:flex-row gap-4">
           <input

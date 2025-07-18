@@ -9,10 +9,15 @@ import About from './pages/about';
 import Contact from './pages/contact';
 import Skills from './components/skills';
 import Banner from './components/scroll';
+import ProjectDetail from './pages/mldetails';
+import TrafficProjectDetail from './pages/TrafficProjectDetail';
+import ExcelDashboardDetail from './pages/ExcelDashboardDetail';
+import ScrollToTop from './components/ScrollToTop';
 
 
 const HomeContent: React.FC = () => (
   <>
+    <ScrollToTop />
     <Hero />
     <Banner />
     <Skills />
@@ -25,6 +30,7 @@ const App: React.FC = () => {
   return (
     <Router>
       <div className="font-sans">
+        <ScrollToTop />
         <Header />
         <MainRoutes />
       </div>
@@ -41,6 +47,10 @@ const MainRoutes: React.FC = () => {
       <Route path="/" element={<HomeContent />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/mldetails" element={<ProjectDetail />} />
+      <Route path="/trafficproject" element={<TrafficProjectDetail />} />
+      <Route path="/excel-dashboard" element={<ExcelDashboardDetail />} />
+      {/* Add more routes as needed */}
     </Routes>
   );
 };

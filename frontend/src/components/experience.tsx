@@ -2,7 +2,7 @@ import React from 'react';
 
 const Experience: React.FC = () => {
   return (
-    <div className="w-full bg-[#F6F6F6] px-6 pt-12 pb-0 flex flex-col items-center">
+    <div className="w-full bg-[#F6F6F6] px-6 pt-20 pb-0 flex flex-col items-center">
       <div className="max-w-5xl w-full text-center mb-8">
         <h2 className="text-3xl md:text-5xl xl:text-6xl font-bold font-playfair text-gray-900 mb-3">
           Experience
@@ -21,9 +21,9 @@ const Experience: React.FC = () => {
             <span className="font-semibold text-black">Xtransmatrix Consulting Services Pvt. Ltd</span> – Bengaluru
           </p>
           <p className="text-xs md:text-sm xl:text-base text-gray-500 mb-4 font-nunito italic">
-            November 2024 – Present
+            November 2024 
           </p>
-          <ul className="list-disc list-inside space-y-2 text-gray-700 text-sm md:text-base xl:text-lg font-nunito">
+          <ul className="list-disc list-inside space-y-2 text-gray-600 text-sm md:text-base xl:text-lg font-nunito">
             <li>
               Collaborated with cross-functional teams to integrate AI prompts into machine learning pipelines for a US-based healthcare client.
             </li>
