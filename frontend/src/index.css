@@ -2,8 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* Optional: Fonts, custom styles */
 body {
   @apply bg-white text-gray-900;
+  overflow-x: hidden; /* ✅ Keep this */
+  /* ❌ Removed: width: 100vw */
 }

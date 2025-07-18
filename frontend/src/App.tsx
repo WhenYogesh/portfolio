@@ -8,37 +8,40 @@ import Experience from './components/experience';
 import About from './pages/about';
 import Contact from './pages/contact';
 import Skills from './components/skills';
-import Banner from './components/scroll';
 import ProjectDetail from './pages/mldetails';
 import TrafficProjectDetail from './pages/TrafficProjectDetail';
 import ExcelDashboardDetail from './pages/ExcelDashboardDetail';
 import ScrollToTop from './components/ScrollToTop';
 
-
+// 🧩 Home page content
 const HomeContent: React.FC = () => (
   <>
     <ScrollToTop />
     <Hero />
-    <Banner />
     <Skills />
     <Experience />
     <ProjectsSection />
   </>
 );
 
+// 🧠 Main app with layout container and router
 const App: React.FC = () => {
   return (
     <Router>
-      <div className="font-sans">
+      <div className="font-sans bg-[#F6F6F6] text-gray-900">
         <ScrollToTop />
         <Header />
-        <MainRoutes />
+
+        {/* ✅ Responsive layout container */}
+        <div className="container mx-auto px-4">
+          <MainRoutes />
+        </div>
       </div>
     </Router>
   );
 };
 
-// Separate routing logic to preserve clarity
+// 📍 Define all routes
 const MainRoutes: React.FC = () => {
   const location = useLocation();
 
@@ -50,7 +53,6 @@ const MainRoutes: React.FC = () => {
       <Route path="/mldetails" element={<ProjectDetail />} />
       <Route path="/trafficproject" element={<TrafficProjectDetail />} />
       <Route path="/excel-dashboard" element={<ExcelDashboardDetail />} />
-      {/* Add more routes as needed */}
     </Routes>
   );
 };

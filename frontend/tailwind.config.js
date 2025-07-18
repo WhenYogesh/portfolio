@@ -5,6 +5,10 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    container: {
+      center: true,
+      padding: '1rem', // Adds left/right padding on all screens
+    },
     extend: {
       fontFamily: {
         nunito: ['Nunito', 'sans-serif'],

@@ -14,7 +14,7 @@ const Skills: React.FC = () => {
   ];
 
   return (
-    <div id="skills" className="w-full bg-[#F6F6F6] px-6 py-12 flex flex-col items-center">
+    <div id="skills" className="w-full bg-[#F6F6F6] px-6 py-24 flex flex-col items-center">
       <div className="max-w-5xl w-full text-center mb-8">
         <h2 className="text-3xl md:text-5xl xl:text-6xl font-bold font-playfair text-gray-900 mb-3">
           Skills

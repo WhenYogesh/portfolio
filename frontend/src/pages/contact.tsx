@@ -36,7 +36,7 @@ const Contact: React.FC = () => {
           Contact Me
         </h2>
         <p className="text-gray-600 text-base md:text-lg font-nunito">
-          Whether it’s about a project, job, or collaboration — I’d love to hear from you!
+          Whether it’s about a project, job, or collaboration!
         </p>
       </div>
 
