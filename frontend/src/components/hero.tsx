@@ -1,90 +1,171 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 
-const Hero: React.FC = () => {
+const CreativeDesignerHero: React.FC = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+  const titleRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (titleRef.current) {
+      const rect = titleRef.current.getBoundingClientRect();
+      setMousePosition({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      });
+    }
+  };
+
   return (
-    <section className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 relative overflow-hidden">
-      {/* Decorative background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-10 w-64 h-64 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
-        <div className="absolute top-40 right-10 w-64 h-64 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
-        <div className="absolute bottom-20 left-1/2 w-64 h-64 bg-pink-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
-      </div>
+    <section className="w-full min-h-screen bg-[#f5f5f0] overflow-hidden">
+      <div className="w-full h-full px-[2vw] sm:px-[3vw] lg:px-[4vw] py-[2vw] lg:py-[4vw] mt-[8vw] lg:mt-[6vw]">
+        {/* Mobile Version */}
+        <div className="lg:hidden flex flex-col items-center justify-center min-h-[80vh]">
+          {/* Title */}
+          <div className="mb-6 text-center">
+            <h1 className="text-[36px] leading-[0.9] font-black tracking-tighter mb-2">
+              WEB<br />DEVELOPER
+            </h1>
+            <p className="text-[10px] tracking-[0.3em] font-light mt-3">
+              LIVES IN BENGALURU
+            </p>
+          </div>
 
-      <div className="relative pt-24 lg:pt-32 pb-16 lg:pb-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          {/* Status Badge */}
-          <div className="flex justify-center mb-8 lg:mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              <span className="text-sm lg:text-base text-gray-800 font-medium">Availble to work</span>
+          {/* Image */}
+          <div className="mb-6 flex flex-col items-center">
+            <div className="w-full max-w-[220px] aspect-[3/4] bg-gray-300 overflow-hidden mb-4">
+              <img 
+                src=".\src\assets\color.jpg" 
+                alt="Creative Designer"
+                className="w-full h-full object-cover grayscale"
+              />
+            </div>
+            
+            {/* Services under image on mobile */}
+            <div className="text-center space-y-1">
+              <p className="text-[12px] font-bold tracking-tight">/PYTHON DEVELOPER</p>
+              <p className="text-[12px] font-bold tracking-tight">/WEB DESIGN (UX/UI)</p>
+              <p className="text-[12px] font-bold tracking-tight">/WORDPRESS DEVELOPMENT</p>
             </div>
           </div>
 
-          {/* Main Headline */}
-          <div className="text-center space-y-4 lg:space-y-6 mb-8 lg:mb-12">
-            {/* First Line */}
-            <div className="flex items-center justify-center gap-3 lg:gap-6 flex-wrap">
-              <h1 className="text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-bold text-black tracking-tight">
-                Brands
-              </h1>
-              <div className="relative group">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-28 lg:h-28 bg-white rounded-2xl lg:rounded-3xl shadow-lg flex items-center justify-center transform group-hover:rotate-3 transition-transform">
-                  <div className="w-12 h-8 sm:w-14 sm:h-10 lg:w-20 lg:h-14 bg-gray-100 rounded-lg relative overflow-hidden">
-                    <div className="absolute inset-2 border border-gray-300 rounded">
-                      <div className="text-[6px] lg:text-[8px] font-mono text-gray-400 p-1 leading-tight">
-                        &lt;div&gt;<br/>
-                        &nbsp;&nbsp;code<br/>
-                        &lt;/div&gt;
-                      </div>
-                    </div>
-                    <svg className="absolute bottom-1 right-1 w-8 h-8 lg:w-12 lg:h-12" viewBox="0 0 40 40" fill="none">
-                      <path d="M5 25 Q 15 15, 25 20 T 35 15" stroke="#ef4444" strokeWidth="2" fill="none"/>
-                    </svg>
-                  </div>
-                </div>
-              </div>
-              <h1 className="text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-bold text-gray-400 tracking-tight">
-                Grow
-              </h1>
+          {/* Recent Work */}
+          <div className="mb-4 text-center">
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <p className="text-[11px] tracking-wide font-medium">RECENT WORK</p>
+              <svg className="w-3 h-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M2 6h8M6 2l4 4-4 4"/>
+              </svg>
+            </div>
+            <h2 className="text-[28px] font-black tracking-tight leading-none">
+              YOGESH V
+            </h2>
+          </div>
+
+          {/* Footer */}
+          <div className="text-center space-y-3">
+            <div className="flex items-center justify-center gap-2">
+              <p className="text-[11px] tracking-wide font-medium">AVAILABLE FOR COLLABORATION</p>
+              <svg className="w-3 h-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M2 6h8M6 2l4 4-4 4"/>
+              </svg>
+            </div>
+            <a href="mailto:yogesh.unique9844@gmail.com" className="text-[12px] underline font-medium block break-all">
+              yogesh.unique9844@gmail.com
+            </a>
+          </div>
+        </div>
+
+        {/* Desktop & Tablet Version */}
+        <div className="hidden lg:block w-full max-w-[1600px] mx-auto">
+          <div className="relative w-full h-[calc(100vh-6rem)]">
+            {/* Top Counter */}
+            <div className="absolute top-0 left-0 text-[10px] xl:text-[11px] font-medium z-10">
+              2025
             </div>
 
-            {/* Second Line */}
-            <div className="flex items-center justify-center gap-3 lg:gap-6 flex-wrap">
-              <h1 className="text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-bold text-gray-400 tracking-tight">
-                Fast
+            {/* Main Title with Image Interaction */}
+            <div 
+              ref={titleRef}
+              className="relative w-full"
+              onMouseMove={handleMouseMove}
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
+            >
+              <h1 className="text-[120px] xl:text-[160px] 2xl:text-[220px] leading-[0.82] font-black tracking-[-0.02em] cursor-default select-none whitespace-nowrap overflow-visible">
+                WEBDEVELOPER
               </h1>
-              <div className="relative group">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-28 lg:h-28 bg-gray-900 rounded-2xl lg:rounded-3xl shadow-lg flex items-center justify-center transform group-hover:rotate-3 transition-transform">
-                  <svg className="w-8 h-8 lg:w-12 lg:h-12" viewBox="0 0 40 40" fill="white">
-                    <path d="M8 8 L32 8 L32 20 L20 20 L20 32 L8 32 Z" opacity="0.9"/>
+              
+              {/* Floating Image - follows cursor */}
+              <div 
+                className={`fixed w-[240px] xl:w-[300px] 2xl:w-[350px] aspect-[3/4] bg-gray-300 overflow-hidden pointer-events-none transition-opacity duration-200 z-[100] ${
+                  isHovering ? 'opacity-100' : 'opacity-0'
+                }`}
+                style={{
+                  left: `${mousePosition.x}px`,
+                  top: `${mousePosition.y}px`,
+                  transform: 'translate(-50%, -50%)',
+                }}
+              >
+                <img 
+                  src=".\src\assets\bw.jpg" 
+                  alt="Creative Designer"
+                  className="w-full h-full object-cover grayscale"
+                />
+              </div>
+            </div>
+
+            {/* "BASED IN BENGALURU" - aligned with title top */}
+            <div className="absolute top-[105px] xl:top-[140px] 2xl:top-[190px] right-0 text-[10px] xl:text-[11px] 2xl:text-[12px] tracking-[0.3em] font-light z-10">
+              LIVES IN BENGALURU
+            </div>
+
+            {/* Services List - positioned left below title */}
+            <div className="absolute left-0 top-[200px] xl:top-[260px] 2xl:top-[350px] space-y-0.5 xl:space-y-1 z-10">
+              <p className="text-[14px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-tight leading-tight">/PYTHON DEVELOPER</p>
+              <p className="text-[14px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-tight leading-tight">/WEB DESIGN (UX/UI)</p>
+              <p className="text-[14px] xl:text-[16px] 2xl:text-[17px] font-bold tracking-tight leading-tight">/WORDPRESS DEVELOPMENT</p>
+            </div>
+
+            {/* Static Image - overlapping title */}
+            <div className="absolute right-[8%] xl:right-[12%] 2xl:right-[15%] top-[50px] xl:top-[80px] 2xl:top-[120px] w-[220px] xl:w-[280px] 2xl:w-[350px] aspect-[3/4] bg-gray-300 overflow-hidden z-20 shadow-lg">
+              <img 
+                src=".\src\assets\color.jpg" 
+                alt="Creative Designer"
+                className="w-full h-full object-cover grayscale"
+              />
+            </div>
+
+            {/* Bottom Section - positioned higher up */}
+            <div className="absolute bottom-[100px] xl:bottom-[120px] 2xl:bottom-[140px] left-0 right-0 w-full">
+              {/* Recent Work */}
+              <div className="mb-6 xl:mb-8">
+                <div className="flex items-center gap-2 xl:gap-3 mb-1 xl:mb-2">
+                  <p className="text-[10px] xl:text-[11px] 2xl:text-[12px] tracking-[0.2em] font-medium">RECENT WORK</p>
+                  <svg className="w-3 h-3 xl:w-4 xl:h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M3 8h10M9 4l4 4-4 4"/>
                   </svg>
                 </div>
+                <h2 className="text-[42px] xl:text-[56px] 2xl:text-[64px] font-black tracking-tight leading-none">
+                  YOGESH V
+                </h2>
               </div>
-              <h1 className="text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-bold text-black tracking-tight">
-                With us
-              </h1>
+
+              {/* Footer */}
+              <div className="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-3 xl:gap-4">
+                <div className="flex items-center gap-2 xl:gap-3">
+                  <p className="text-[10px] xl:text-[11px] 2xl:text-[12px] tracking-[0.2em] font-medium">AVAILABLE FOR COLLABORATION</p>
+                  <svg className="w-3 h-3 xl:w-4 xl:h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M3 8h10M9 4l4 4-4 4"/>
+                  </svg>
+                </div>
+                <a 
+                  href="mailto:yogesh.unique9844@gmail.com" 
+                  className="text-[12px] xl:text-[13px] 2xl:text-[14px] underline font-medium hover:no-underline transition-all"
+                >
+                  yogesh.unique9844@gmail.com
+                </a>
+              </div>
             </div>
-          </div>
-
-          {/* Description */}
-          <p className="text-center text-gray-600 text-base sm:text-lg lg:text-xl max-w-2xl mx-auto mb-10 lg:mb-16 px-4">
-            We don't just make brands pretty — we craft<br className="hidden sm:block" />
-            smart design that fuels real business growth.
-          </p>
-
-          {/* CTA Button */}
-          <div className="flex justify-center">
-            <button className="group relative inline-flex items-center gap-3 px-8 py-4 lg:px-10 lg:py-5 bg-black text-white rounded-full text-base lg:text-lg font-semibold hover:bg-gray-900 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
-              <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center">
-                <svg className="w-4 h-4 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                </svg>
-              </div>
-              <span>Book a Meeting</span>
-              <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </button>
           </div>
         </div>
       </div>
@@ -92,7 +173,4 @@ const Hero: React.FC = () => {
   );
 };
 
-export default Hero;
-
-// ===================================================================
-
+export default CreativeDesignerHero;

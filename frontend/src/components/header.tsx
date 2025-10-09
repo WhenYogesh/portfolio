@@ -10,7 +10,7 @@ const Header: React.FC = () => {
             <div className="w-6 h-6 lg:w-7 lg:h-7 bg-black rounded-sm flex items-center justify-center">
               <div className="w-3 h-3 lg:w-3.5 lg:h-3.5 bg-white rounded-full"></div>
             </div>
-            <span className="text-xl lg:text-2xl font-semibold text-black">Denqid</span>
+            <span className="text-xl lg:text-2xl font-semibold text-black">YOGESH</span>
           </div>
 
           {/* Menu Button */}
