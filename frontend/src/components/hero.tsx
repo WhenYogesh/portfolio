@@ -109,70 +109,73 @@ const CreativeDesignerHero: React.FC = () => {
       <div className="w-full min-h-screen px-[2vw] sm:px-[3vw] lg:px-[4vw] py-[2vw] lg:py-[4vw]">
         
         {/* Mobile/Tablet Version */}
-        <div className="lg:hidden flex flex-col items-center justify-start min-h-screen pt-20">
-          <div className="mb-6 text-center mt-2">
-            <h1 className="text-[42px] leading-[0.85] font-black tracking-tighter mb-3">
-              {letters.map((letter, index) => (
-                <span
-                  key={index}
-                  className="inline-block"
-                >
-                  {letter}
-                </span>
-              ))}
-            </h1>
-            <p className="text-[11px] tracking-[0.3em] font-light mt-4">
-              LIVES IN BENGALURU
-            </p>
-          </div>
+<div className="lg:hidden flex flex-col items-center justify-start min-h-screen pt-20">
+  <div className="mb-6 text-center mt-2">
+    <h1 className="text-[42px] leading-[0.85] font-black tracking-tighter mb-3">
+      {letters.map((letter, index) => (
+        <span key={index} className="inline-block">
+          {letter}
+        </span>
+      ))}
+    </h1>
+    <p className="text-[11px] tracking-[0.3em] font-light mt-4">
+      LIVES IN BENGALURU
+    </p>
+  </div>
 
-          {/* Image */}
-          <div className="mb-8 flex flex-col items-center">
-            <div className="w-full max-w-[260px] aspect-[3/4] bg-gray-300 overflow-hidden mb-6 rounded-lg">
-              <img 
-                src="./src/assets/color.jpg" 
-                alt="Creative Designer"
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
-              />
-            </div>
-            
-            {/* Services under image on mobile */}
-            <div className="text-center space-y-3 px-4">
-              {allServices.map(service => (
-                <p 
-                  key={service.key}
-                  className="text-[14px] font-black tracking-tight transform hover:scale-105 transition-transform duration-200"
-                >
-                  {service.title}
-                </p>
-              ))}
-            </div>
-          </div>
+  {/* Image and YOGESH V side by side */}
+  <div className="mb-8 flex items-center justify-center gap-4 px-4">
+    {/* Image */}
+    <div className="w-[150px] aspect-[3/4] bg-gray-300 overflow-hidden rounded-lg">
+      <img 
+        src="./src/assets/color.jpg" 
+        alt="Creative Designer"
+        className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+      />
+    </div>
 
-          <div className="mb-6 text-center">
-            <div className="flex items-center justify-center gap-3 mb-3">
-              <p className="text-[12px] tracking-wide font-medium">Know More</p>
-              <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M3 8h10M9 4l4 4-4 4"/>
-              </svg>
-            </div>
-            <h2 className="text-[32px] font-black tracking-tight leading-none">
-              YOGESH V
-            </h2>
-          </div>
+    {/* YOGESH V next to image */}
+    <h2 className="text-[28px] font-black tracking-tight leading-none">
+      YOGESH V
+    </h2>
+  </div>
 
-          <div className="text-center space-y-4 pb-8">
-            <div className="flex items-center justify-center gap-3">
-              <p className="text-[12px] tracking-wide font-medium">AVAILABLE FOR COLLABORATION</p>
-              <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M3 8h10M9 4l4 4-4 4"/>
-              </svg>
-            </div>
-            <a href="mailto:yogesh.unique9844@gmail.com" className="text-[13px] underline font-medium block break-all">
-              yogesh.unique9844@gmail.com
-            </a>
-          </div>
-        </div>
+  {/* Services under image on mobile */}
+  <div className="text-center space-y-3 px-4 mb-6">
+    {allServices.map(service => (
+      <p 
+        key={service.key}
+        className="text-[12px] font-black tracking-tight transform hover:scale-105 transition-transform duration-200"
+      >
+        {service.title}
+      </p>
+    ))}
+  </div>
+
+  {/* Know more section */}
+  <div className="mb-6 text-center">
+    <div className="flex items-center justify-center gap-3 mb-3">
+      <p className="text-[12px] tracking-wide font-medium">Know More</p>
+      <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M3 8h10M9 4l4 4-4 4"/>
+      </svg>
+    </div>
+  </div>
+
+  {/* Contact section */}
+  <div className="text-center space-y-4 pb-8">
+    <div className="flex items-center justify-center gap-3">
+      <p className="text-[12px] tracking-wide font-medium">AVAILABLE FOR COLLABORATION</p>
+      <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M3 8h10M9 4l4 4-4 4"/>
+      </svg>
+    </div>
+    <a href="mailto:yogesh.unique9844@gmail.com" className="text-[13px] underline font-medium block break-all">
+      yogesh.unique9844@gmail.com
+    </a>
+  </div>
+</div>
+
 
         {/* Desktop & Tablet Version */}
         <div className="hidden lg:block w-full h-[calc(100vh-4vw)] relative">
