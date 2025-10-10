@@ -15,7 +15,8 @@ const CreativeDesignerHero: React.FC = () => {
     { title: "/PYTHON DEVELOPER", key: 1 },
     { title: "/WEB DESIGN (UX/UI)", key: 2 },
     { title: "/WORDPRESS DEVELOPMENT", key: 3 },
-  ];
+  ];   
+
 
   // Right side services (3 items)
   const rightServices = [

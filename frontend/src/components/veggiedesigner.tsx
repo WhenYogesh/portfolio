@@ -11,7 +11,7 @@ const VeggieTDesigner: React.FC = () => {
       subtitle: "SERVER ARCHITECTURE",
       description: "Building scalable Python backend systems with Django, FastAPI, and Flask",
       tech: "Python • Django • PostgreSQL • Redis",
-      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+      image: "./src/assets/Gemini_Generated_Image_hd9dhqhd9dhqhd9d.png"
     },
     {
       id: 2,
@@ -19,7 +19,7 @@ const VeggieTDesigner: React.FC = () => {
       subtitle: "DATA EXTRACTION",
       description: "Advanced web scraping solutions with BeautifulSoup, Scrapy, and Selenium",
       tech: "Scrapy • BeautifulSoup • Selenium • APIs",
-      image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+      image: "./src/assets/Gemini_Generated_Image_nldsh5nldsh5nlds.png"
     },
     {
       id: 3,
@@ -27,7 +27,7 @@ const VeggieTDesigner: React.FC = () => {
       subtitle: "UI/UX DESIGN",
       description: "Creating responsive web designs with modern frameworks and best practices",
       tech: "React • Tailwind • Figma • Responsive Design",
-      image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+      image: "./src/assets/Gemini_Generated_Image_72lhqo72lhqo72lh.png"
     },
     {
       id: 4,
@@ -35,7 +35,7 @@ const VeggieTDesigner: React.FC = () => {
       subtitle: "DATA MODELING",
       description: "Designing efficient database schemas and optimizing queries for performance",
       tech: "SQL • MongoDB • Database Design • Optimization",
-      image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+      image: "./src/assets/Gemini_Generated_Image_yeu7cuyeu7cuyeu7.png"
     },
     {
       id: 5,
@@ -43,7 +43,7 @@ const VeggieTDesigner: React.FC = () => {
       subtitle: "REST & GRAPHQL",
       description: "Building robust APIs with proper documentation and authentication systems",
       tech: "REST APIs • GraphQL • Authentication • Documentation",
-      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+      image: "./src/assets/Gemini_Generated_Image_yjf1t5yjf1t5yjf1.png"
     }
   ];
 
@@ -83,7 +83,7 @@ const VeggieTDesigner: React.FC = () => {
             backgroundImage: `url(${slides[currentSlide].image})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            filter: 'grayscale(100%) brightness(0.7)',
+            filter: 'grayscale(60%) brightness(0.2)',
             transform: `scale(1.02)`,
           }}
         />
