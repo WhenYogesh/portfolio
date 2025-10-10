@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import Spline from '@splinetool/react-spline';
 
 const CreativeDesignerHero: React.FC = () => {
   const [hoveredLetter, setHoveredLetter] = useState<number | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [splineLoaded, setSplineLoaded] = useState(false);
+  const [splineError, setSplineError] = useState(false);
 
   const title = "WEB DEVELOPER";
   const letters = title.split('');
@@ -55,6 +58,14 @@ const CreativeDesignerHero: React.FC = () => {
     setHoveredLetter(null);
   };
 
+  const handleSplineLoad = () => {
+    setSplineLoaded(true);
+  };
+
+  const handleSplineError = () => {
+    setSplineError(true);
+  };
+
   // Custom cursor component with image
   const CustomCursor: React.FC = () => {
     return (
@@ -69,7 +80,7 @@ const CreativeDesignerHero: React.FC = () => {
         }}
       >
         {hoveredLetter !== null && (
-          <div className="w-32 h-40 bg-gray-300 overflow-hidden rounded-lg shadow-2xl border-2 border-white">
+          <div className="w-32 h-40 bg-gray-800 overflow-hidden rounded-lg shadow-2xl border-2 border-white">
             <img 
               src={letterImages[hoveredLetter]} 
               alt={`Letter ${letters[hoveredLetter]}`}
@@ -84,7 +95,7 @@ const CreativeDesignerHero: React.FC = () => {
   const renderServiceItem = (service: { title: string, key: number }) => (
     <p 
       key={service.key}
-      className="text-[17px] xl:text-[19px] 2xl:text-[22px] font-black tracking-tight leading-tight transform hover:translate-x-3 transition-transform duration-300 cursor-pointer"
+      className="text-[17px] xl:text-[19px] 2xl:text-[22px] font-black tracking-tight leading-tight transform hover:translate-x-3 transition-transform duration-300 cursor-pointer text-white"
     >
       {service.title}
     </p>
@@ -93,7 +104,7 @@ const CreativeDesignerHero: React.FC = () => {
   const renderRightServiceItem = (service: { title: string, key: number }) => (
     <p 
       key={service.key}
-      className="text-[17px] xl:text-[19px] 2xl:text-[22px] font-black tracking-tight leading-tight transform hover:-translate-x-3 transition-transform duration-300 cursor-pointer"
+      className="text-[17px] xl:text-[19px] 2xl:text-[22px] font-black tracking-tight leading-tight transform hover:-translate-x-3 transition-transform duration-300 cursor-pointer text-white"
     >
       {service.title}
     </p>
@@ -101,91 +112,110 @@ const CreativeDesignerHero: React.FC = () => {
 
   return (
     <section 
-      className="w-full min-h-screen bg-[#f5f5f0] overflow-hidden"
+      className="w-full min-h-screen bg-black text-white overflow-hidden relative"
       onMouseMove={handleMouseMove}
     >
+      {/* Spline Background */}
+      <div className="absolute inset-0 z-0">
+        {splineError ? (
+          <div className="w-full h-full flex items-center justify-center bg-gray-900">
+            <p className="text-lg text-white">3D Background failed to load</p>
+          </div>
+        ) : (
+          <Spline
+            scene="https://prod.spline.design/W-pVnC7XXJ34xj3E/scene.splinecode"
+            onLoad={handleSplineLoad}
+            onError={handleSplineError}
+            className="w-full h-full"
+          />
+        )}
+        {/* Overlay to improve text readability */}
+        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+      </div>
+
       <CustomCursor />
       
-      <div className="w-full min-h-screen px-[2vw] sm:px-[3vw] lg:px-[4vw] py-[2vw] lg:py-[4vw]">
+      {/* Content Container */}
+      <div className="relative z-10 w-full min-h-screen px-[2vw] sm:px-[3vw] lg:px-[4vw] py-[2vw] lg:py-[4vw]">
         
         {/* Mobile/Tablet Version */}
-<div className="lg:hidden flex flex-col items-center justify-start min-h-screen pt-20">
-  <div className="mb-6 text-center mt-2">
-    <h1 className="text-[42px] leading-[0.85] font-black tracking-tighter mb-3">
-      {letters.map((letter, index) => (
-        <span key={index} className="inline-block">
-          {letter}
-        </span>
-      ))}
-    </h1>
-    <p className="text-[11px] tracking-[0.3em] font-light mt-4">
-      LIVES IN BENGALURU
-    </p>
-  </div>
+        <div className="lg:hidden flex flex-col items-center justify-start min-h-screen pt-20">
+          <div className="mb-6 text-center mt-2">
+            <h1 className="text-[42px] leading-[0.85] font-black tracking-tighter mb-3 text-white">
+              {letters.map((letter, index) => (
+                <span key={index} className="inline-block">
+                  {letter}
+                </span>
+              ))}
+            </h1>
+            <p className="text-[11px] tracking-[0.3em] font-light mt-4 text-white">
+              LIVES IN BENGALURU
+            </p>
+          </div>
 
-  {/* Image and YOGESH V side by side */}
-  <div className="mb-8 flex items-center justify-center gap-4 px-4">
-    {/* Image */}
-    <div className="w-[220px] aspect-[3/4] bg-gray-300 overflow-hidden rounded-lg">
-      <img 
-        src="./src/assets/color.jpg" 
-        alt="Creative Designer"
-        className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
-      />
-    </div>
+          {/* Image and YOGESH V side by side */}
+          <div className="mb-8 flex items-center justify-center gap-4 px-4">
+            {/* Image */}
+            <div className="w-[220px] aspect-[3/4] bg-gray-800 overflow-hidden rounded-lg">
+              <img 
+                src="./src/assets/color.jpg" 
+                alt="Creative Designer"
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+              />
+            </div>
 
-    {/* YOGESH V next to image */}
-    <h2 className="text-[18px] font-black tracking-tight leading-none">
-      YOGESH V
-    </h2>
-  </div>
+            {/* YOGESH V next to image */}
+            <h2 className="text-[18px] font-black tracking-tight leading-none text-white">
+              YOGESH V
+            </h2>
+          </div>
 
-  {/* Services under image on mobile */}
-  <div className="text-center space-y-3 px-4 mb-6">
-    {allServices.map(service => (
-      <p 
-        key={service.key}
-        className="text-[16px] font-800 font-black tracking-tight transform hover:scale-105 transition-transform duration-200"
-      >
-        {service.title}
-      </p>
-    ))}
-  </div>
+          {/* Services under image on mobile */}
+          <div className="text-center space-y-3 px-4 mb-6">
+            {allServices.map(service => (
+              <p 
+                key={service.key}
+                className="text-[16px] font-800 font-black tracking-tight transform hover:scale-105 transition-transform duration-200 text-white"
+              >
+                {service.title}
+              </p>
+            ))}
+          </div>
 
-  {/* Know more section */}
-  <div className="mb-6 text-center">
-    <div className="flex items-center justify-center gap-3 mb-3">
-      <p className="text-[16px] tracking-wide font-bold">Know More</p>
-      <svg className="w-5 h-5" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M3 8h10M9 4l4 4-4 4"/>
-      </svg>
-    </div>
-  </div>
+          {/* Know more section */}
+          <div className="mb-6 text-center">
+            <div className="flex items-center justify-center gap-3 mb-3">
+              <p className="text-[16px] tracking-wide font-bold text-white">Know More</p>
+              <svg className="w-5 h-5 text-white" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M3 8h10M9 4l4 4-4 4"/>
+              </svg>
+            </div>
+          </div>
 
-  {/* Contact section */}
-  <div className="text-center space-y-4 pb-8">
-    <div className="flex items-center justify-center gap-3">
-      <p className="text-[16px] tracking-wide font-medium">AVAILABLE FOR COLLABORATION</p>
-      <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M3 8h10M9 4l4 4-4 4"/>
-      </svg>
-    </div>
-    <a href="mailto:yogesh.unique9844@gmail.com" className="text-[15px] underline font-bold block break-all">
-      yogesh.unique9844@gmail.com
-    </a>
-  </div>
-</div>
+          {/* Contact section */}
+          <div className="text-center space-y-4 pb-8">
+            <div className="flex items-center justify-center gap-3">
+              <p className="text-[16px] tracking-wide font-medium text-white">AVAILABLE FOR COLLABORATION</p>
+              <svg className="w-4 h-4 text-white" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M3 8h10M9 4l4 4-4 4"/>
+              </svg>
+            </div>
+            <a href="mailto:yogesh.unique9844@gmail.com" className="text-[15px] underline font-bold block break-all text-white hover:text-gray-300 transition-colors">
+              yogesh.unique9844@gmail.com
+            </a>
+          </div>
+        </div>
 
         {/* Desktop & Tablet Version */}
         <div className="hidden lg:block w-full h-[calc(100vh-4vw)] relative">
           
           {/* Top-Left: 2025 */}
-          <div className="absolute top-[60px] left-0 text-[11px] xl:text-[16px] 2xl:text-[18px] font-medium z-30">
+          <div className="absolute top-[60px] left-0 text-[11px] xl:text-[16px] 2xl:text-[18px] font-medium z-30 text-white">
             2025
           </div>
           
           {/* Top-Right: BASED IN BENGALURU */}
-          <div className="absolute top-[180px] xl:top-[200px] 2xl:top-[320px] right-0 text-[11px] xl:text-[12px] 2xl:text-[13px] tracking-[0.3em] font-light z-30">
+          <div className="absolute top-[180px] xl:top-[200px] 2xl:top-[320px] right-0 text-[11px] xl:text-[12px] 2xl:text-[13px] tracking-[0.3em] font-light z-30 text-white">
             LIVES IN BENGALURU
           </div>
 
@@ -193,11 +223,11 @@ const CreativeDesignerHero: React.FC = () => {
           <div className="relative w-full pt-12">
             
             {/* Title Text */}
-            <h1 className="max-w-full text-[120px] xl:text-[120px] 2xl:text-[240px] 4xl:text-[260px] leading-[0.82] font-black tracking-[-0.02em] cursor-default select-none whitespace-nowrap overflow-visible relative z-30 pt-8">
+            <h1 className="max-w-full text-[120px] xl:text-[120px] 2xl:text-[240px] 4xl:text-[260px] leading-[0.82] font-black tracking-[-0.02em] cursor-default select-none whitespace-nowrap overflow-visible relative z-30 pt-8 text-white">
               {letters.map((letter, index) => (
                 <span
                   key={index}
-                  className="inline-block transition-all duration-300 hover:text-gray-600 hover:scale-110 hover:translate-y-[-4px]"
+                  className="inline-block transition-all duration-300 hover:text-gray-400 hover:scale-110 hover:translate-y-[-4px] text-white"
                   onMouseEnter={() => handleLetterHover(index)}
                   onMouseLeave={handleLetterLeave}
                   style={{
@@ -210,7 +240,7 @@ const CreativeDesignerHero: React.FC = () => {
             </h1>
             
             {/* Image */}
-            <div className="absolute lg:left-[36%] xl:left-[40%] 2xl:left-[%] lg:top-[200px] xl:top-[220px] 2xl:top-[200px] w-[300px] xl:w-[360px] 2xl:w-[450px] aspect-[3/4] bg-gray-300 overflow-hidden z-10 rounded-lg shadow-xl">
+            <div className="absolute lg:left-[36%] xl:left-[40%] 2xl:left-[%] lg:top-[200px] xl:top-[220px] 2xl:top-[200px] w-[300px] xl:w-[360px] 2xl:w-[450px] aspect-[3/4] bg-gray-800 overflow-hidden z-10 rounded-lg shadow-xl">
               <img 
                 src="./src/assets/color.jpg" 
                 alt="Creative Designer"
@@ -241,13 +271,13 @@ const CreativeDesignerHero: React.FC = () => {
               {/* Left: Recent Work (YOGESH V) */}
               <div className="mb-8 xl:mb-10">
                 <div className="flex items-center gap-3 xl:gap-4 mb-2 xl:mb-3">
-                  <p className="text-[11px] xl:text-[13px] 2xl:text-[18px] tracking-[0.2em] font-medium">Know More</p>
-                  <svg className="w-4 h-4 xl:w-5 xl:h-5" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
+                  <p className="text-[11px] xl:text-[13px] 2xl:text-[18px] tracking-[0.2em] font-medium text-white">Know More</p>
+                  <svg className="w-4 h-4 xl:w-5 xl:h-5 text-white" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M3 8h10M9 4l4 4-4 4"/>
                   </svg>
                 </div>
                 <h2 
-                  className="text-[46px] xl:text-[56px] 2xl:text-[72px] font-black tracking-tight leading-none transform hover:scale-105 transition-transform duration-300 cursor-pointer"
+                  className="text-[46px] xl:text-[56px] 2xl:text-[72px] font-black tracking-tight leading-none transform hover:scale-105 transition-transform duration-300 cursor-pointer text-white"
                 >
                   YOGESH V
                 </h2>
@@ -258,14 +288,14 @@ const CreativeDesignerHero: React.FC = () => {
                 <div 
                   className="flex items-center gap-3 xl:gap-4 transform hover:translate-x-2 transition-transform duration-300 cursor-pointer"
                 >
-                  <p className="text-[11px] xl:text-[13px] 2xl:text-[18px] tracking-[0.2em] font-medium">AVAILABLE FOR COLLABORATION</p>
-                  <svg className="w-4 h-4 xl:w-5 xl:h-5" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
+                  <p className="text-[11px] xl:text-[13px] 2xl:text-[18px] tracking-[0.2em] font-medium text-white">AVAILABLE FOR COLLABORATION</p>
+                  <svg className="w-4 h-4 xl:w-5 xl:h-5 text-white" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M3 8h10M9 4l4 4-4 4"/>
                   </svg>
                 </div>
                 <a 
                   href="mailto:yogesh.unique9844@gmail.com" 
-                  className="text-[13px] xl:text-[14px] 2xl:text-[18px] underline font-medium hover:no-underline transition-all transform hover:scale-105"
+                  className="text-[13px] xl:text-[14px] 2xl:text-[18px] underline font-medium hover:no-underline transition-all transform hover:scale-105 text-white hover:text-gray-300"
                 >
                   yogesh.unique9844@gmail.com
                 </a>
