@@ -16,9 +16,9 @@ const CreativeDesignerHero: React.FC = () => {
 
   // Right side services (3 items)
   const rightServices = [
-    { title: "/UI/UX CONSULTING", key: 4 },
+    { title: "/UI/UX DESIGNER", key: 4 },
     { title: "/FRONTEND DEVELOPMENT", key: 5 },
-    { title: "/BRANDING & IDENTITY", key: 6 },
+    { title: "/WEB SCRAPING", key: 6 },
   ];
 
   // All services for mobile view
@@ -126,7 +126,7 @@ const CreativeDesignerHero: React.FC = () => {
   {/* Image and YOGESH V side by side */}
   <div className="mb-8 flex items-center justify-center gap-4 px-4">
     {/* Image */}
-    <div className="w-[150px] aspect-[3/4] bg-gray-300 overflow-hidden rounded-lg">
+    <div className="w-[220px] aspect-[3/4] bg-gray-300 overflow-hidden rounded-lg">
       <img 
         src="./src/assets/color.jpg" 
         alt="Creative Designer"
@@ -135,7 +135,7 @@ const CreativeDesignerHero: React.FC = () => {
     </div>
 
     {/* YOGESH V next to image */}
-    <h2 className="text-[28px] font-black tracking-tight leading-none">
+    <h2 className="text-[18px] font-black tracking-tight leading-none">
       YOGESH V
     </h2>
   </div>
@@ -145,7 +145,7 @@ const CreativeDesignerHero: React.FC = () => {
     {allServices.map(service => (
       <p 
         key={service.key}
-        className="text-[12px] font-black tracking-tight transform hover:scale-105 transition-transform duration-200"
+        className="text-[16px] font-800 font-black tracking-tight transform hover:scale-105 transition-transform duration-200"
       >
         {service.title}
       </p>
@@ -155,8 +155,8 @@ const CreativeDesignerHero: React.FC = () => {
   {/* Know more section */}
   <div className="mb-6 text-center">
     <div className="flex items-center justify-center gap-3 mb-3">
-      <p className="text-[12px] tracking-wide font-medium">Know More</p>
-      <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
+      <p className="text-[16px] tracking-wide font-bold">Know More</p>
+      <svg className="w-5 h-5" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M3 8h10M9 4l4 4-4 4"/>
       </svg>
     </div>
@@ -165,17 +165,16 @@ const CreativeDesignerHero: React.FC = () => {
   {/* Contact section */}
   <div className="text-center space-y-4 pb-8">
     <div className="flex items-center justify-center gap-3">
-      <p className="text-[12px] tracking-wide font-medium">AVAILABLE FOR COLLABORATION</p>
+      <p className="text-[16px] tracking-wide font-medium">AVAILABLE FOR COLLABORATION</p>
       <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M3 8h10M9 4l4 4-4 4"/>
       </svg>
     </div>
-    <a href="mailto:yogesh.unique9844@gmail.com" className="text-[13px] underline font-medium block break-all">
+    <a href="mailto:yogesh.unique9844@gmail.com" className="text-[15px] underline font-bold block break-all">
       yogesh.unique9844@gmail.com
     </a>
   </div>
 </div>
-
 
         {/* Desktop & Tablet Version */}
         <div className="hidden lg:block w-full h-[calc(100vh-4vw)] relative">
@@ -186,15 +185,15 @@ const CreativeDesignerHero: React.FC = () => {
           </div>
           
           {/* Top-Right: BASED IN BENGALURU */}
-          <div className="absolute top-[180px] xl:top-[200px] 2xl:top-[260px] right-0 text-[11px] xl:text-[12px] 2xl:text-[13px] tracking-[0.3em] font-light z-30">
-            BASED IN BENGALURU
+          <div className="absolute top-[180px] xl:top-[200px] 2xl:top-[320px] right-0 text-[11px] xl:text-[12px] 2xl:text-[13px] tracking-[0.3em] font-light z-30">
+            LIVES IN BENGALURU
           </div>
 
           {/* Main Title and Image Container */}
           <div className="relative w-full pt-12">
             
             {/* Title Text */}
-            <h1 className="max-w-full text-[120px] xl:text-[120px] 2xl:text-[240px] leading-[0.82] font-black tracking-[-0.02em] cursor-default select-none whitespace-nowrap overflow-visible relative z-30 pt-8">
+            <h1 className="max-w-full text-[120px] xl:text-[120px] 2xl:text-[240px] 4xl:text-[260px] leading-[0.82] font-black tracking-[-0.02em] cursor-default select-none whitespace-nowrap overflow-visible relative z-30 pt-8">
               {letters.map((letter, index) => (
                 <span
                   key={index}
@@ -211,7 +210,7 @@ const CreativeDesignerHero: React.FC = () => {
             </h1>
             
             {/* Image */}
-            <div className="absolute lg:left-[36%] xl:left-[40%] 2xl:left-[35%] lg:top-[200px] xl:top-[220px] 2xl:top-[200px] w-[300px] xl:w-[360px] 2xl:w-[450px] aspect-[3/4] bg-gray-300 overflow-hidden z-10 rounded-lg shadow-xl">
+            <div className="absolute lg:left-[36%] xl:left-[40%] 2xl:left-[%] lg:top-[200px] xl:top-[220px] 2xl:top-[200px] w-[300px] xl:w-[360px] 2xl:w-[450px] aspect-[3/4] bg-gray-300 overflow-hidden z-10 rounded-lg shadow-xl">
               <img 
                 src="./src/assets/color.jpg" 
                 alt="Creative Designer"
