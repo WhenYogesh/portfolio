@@ -4,7 +4,7 @@ import Spline from '@splinetool/react-spline';
 const CreativeDesignerHero: React.FC = () => {
   const [hoveredLetter, setHoveredLetter] = useState<number | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [splineLoaded, setSplineLoaded] = useState(false);
+  const [, setSplineLoaded] = useState(false);
   const [splineError, setSplineError] = useState(false);
 
   const title = "WEB DEVELOPER";
