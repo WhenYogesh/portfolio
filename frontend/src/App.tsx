@@ -4,7 +4,6 @@ import CreativeDesignerHero from './components/hero';
 import AboutHeroSection from './components/aboutme';
 import AutoHorizontalScrollPortfolio from './components/projects';
 import VerticalConnectList from './components/pro';
-import VeggieTDesigner from './components/veggiedesigner';
 import './index.css';
 
 // src/App.tsx
@@ -17,7 +16,6 @@ const App: React.FC = () => {
       <AboutHeroSection />
       <VerticalConnectList />
       <AutoHorizontalScrollPortfolio />
-      <VeggieTDesigner />
     </div>
   );
 };
