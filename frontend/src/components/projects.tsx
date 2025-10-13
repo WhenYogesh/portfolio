@@ -76,11 +76,11 @@ const AutoHorizontalScrollPortfolio: React.FC = () => {
   const [isLargeScreen, setIsLargeScreen] = useState(true);
 
   const projects: Project[] = [
-    { id: 1, title: "Web Development", description: "Python & Web Scraping", bgColor: "bg-gradient-to-br from-blue-500 to-purple-700", tech: ["Python", "BeautifulSoup", "Scrapy", "FastAPI"] },
-    { id: 2, title: "WordPress", description: "Custom Themes & Plugins", bgColor: "bg-gradient-to-br from-green-500 to-blue-600", tech: ["PHP", "JavaScript", "Custom Themes", "WooCommerce"] },
-    { id: 3, title: "UX Design", description: "User Experience & Research", bgColor: "bg-gradient-to-br from-orange-500 to-pink-700", tech: ["Figma", "User Research", "Prototyping", "Testing"] },
-    { id: 4, title: "AWS Cloud", description: "Infrastructure & Deployment", bgColor: "bg-gradient-to-br from-yellow-500 to-red-600", tech: ["EC2", "S3", "Lambda", "RDS"] },
-    { id: 5, title: "Digital Design", description: "Motion & Web Experience", bgColor: "bg-gradient-to-br from-purple-500 to-indigo-700", tech: ["After Effects", "WebGL", "GSAP", "Three.js"] }
+    { id: 1, title: "Web Development", description: "Python & Web Scraping", bgColor: "bg-gradient-to-br from-purple-300 to-grey-900", tech: ["Python", "BeautifulSoup", "Scrapy", "FastAPI"] },
+    { id: 2, title: "WordPress", description: "Custom Themes & Plugins", bgColor: "bg-gradient-to-br from-green-800 to-grey-900", tech: ["PHP", "JavaScript", "Custom Themes", "WooCommerce"] },
+    { id: 3, title: "UX Design", description: "User Experience & Research", bgColor: "bg-gradient-to-br from-blue-300 to-grey-900", tech: ["Figma", "User Research", "Prototyping", "Testing"] },
+    { id: 4, title: "AWS Cloud", description: "Infrastructure & Deployment", bgColor: "bg-gradient-to-br from-red-300 to-grey-900", tech: ["EC2", "S3", "Lambda", "RDS"] },
+    { id: 5, title: "Digital Design", description: "Motion & Web Experience", bgColor: "bg-gradient-to-br from-purple-300 to-grey-900", tech: ["After Effects", "WebGL", "GSAP", "Three.js"] }
   ];
 
   // 1. Check Screen Size for Mobile/Tablet Fallback

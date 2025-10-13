@@ -16,8 +16,10 @@ import profileImage from '/images/bw.jpg';
 const CreativeDesignerHero: React.FC = () => {
   const [hoveredLetter, setHoveredLetter] = useState<number | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
   const videoRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   const title = "WEB DEVELOPER";
   const letters = title.split('');
@@ -75,17 +77,43 @@ const CreativeDesignerHero: React.FC = () => {
   useEffect(() => {
     adjustFontSize();
     window.addEventListener('resize', adjustFontSize);
-    
+
+    // Hide default cursor when inside this section
+    const handleMouseEnter = () => {
+      document.body.style.cursor = 'none';
+      setIsHovering(true);
+    };
+
+    const handleMouseLeave = () => {
+      document.body.style.cursor = 'auto';
+      setIsHovering(false);
+      setHoveredLetter(null);
+    };
+
+    const section = sectionRef.current;
+    if (section) {
+      section.addEventListener('mouseenter', handleMouseEnter);
+      section.addEventListener('mouseleave', handleMouseLeave);
+    }
+
     return () => {
       window.removeEventListener('resize', adjustFontSize);
+      if (section) {
+        section.removeEventListener('mouseenter', handleMouseEnter);
+        section.removeEventListener('mouseleave', handleMouseLeave);
+      }
+      document.body.style.cursor = 'auto';
     };
   }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    setMousePosition({
-      x: e.clientX,
-      y: e.clientY,
-    });
+    if (sectionRef.current) {
+      const rect = sectionRef.current.getBoundingClientRect();
+      setMousePosition({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      });
+    }
   };
 
   const handleLetterHover = (index: number) => {
@@ -96,29 +124,129 @@ const CreativeDesignerHero: React.FC = () => {
     setHoveredLetter(null);
   };
 
-  // Custom cursor component with image
-  const CustomCursor: React.FC = () => {
+  // Enhanced Galaxy Spreading Shining Cursor Component
+  const GalaxyCursor: React.FC = () => {
+    if (!isHovering) return null;
+
     return (
-      <div
-        className={`fixed pointer-events-none z-50 transition-all duration-150 ${
-          hoveredLetter !== null ? "opacity-100 scale-100" : "opacity-0 scale-50"
-        }`}
-        style={{
-          left: `${mousePosition.x}px`,
-          top: `${mousePosition.y}px`,
-          transform: 'translate(-50%, -50%)',
-        }}
-      >
-        {hoveredLetter !== null && (
-          <div className="w-32 h-40 bg-gray-800 overflow-hidden rounded-lg shadow-2xl border-2 border-white">
-            <img 
-              src={letterImages[hoveredLetter]} 
-              alt={`Letter ${letters[hoveredLetter]}`}
-              className="w-full h-full object-cover"
-            />
+      <>
+        {/* Main cursor core with intense glow */}
+        <div
+          className="absolute pointer-events-none z-50 transition-all duration-75 ease-out"
+          style={{
+            left: `${mousePosition.x}px`,
+            top: `${mousePosition.y}px`,
+            transform: 'translate(-50%, -50%)',
+          }}
+        >
+          <div className={`relative transition-all duration-300 ${
+            hoveredLetter !== null ? "scale-200" : "scale-100"
+          }`}>
+            {/* Outer spreading glow */}
+            <div className={`absolute inset-0 rounded-full blur-xl transition-all duration-700 ${
+              hoveredLetter !== null 
+                ? "bg-purple-500/60 w-16 h-16 animate-pulse" 
+                : "bg-blue-400/40 w-8 h-8"
+            }`}></div>
+            
+            {/* Middle nebula layer */}
+            <div className={`absolute inset-0 rounded-full blur-lg transition-all duration-500 ${
+              hoveredLetter !== null 
+                ? "bg-pink-400/70 w-12 h-12 animate-ping" 
+                : "bg-cyan-400/50 w-6 h-6"
+            }`} style={{ animationDuration: '2s' }}></div>
+            
+            {/* Inner star core */}
+            <div className={`relative rounded-full transition-all duration-300 shadow-2xl ${
+              hoveredLetter !== null 
+                ? "bg-white w-4 h-4 shadow-white/80" 
+                : "bg-white w-2 h-2 shadow-white/60"
+            }`}></div>
           </div>
+        </div>
+
+        {/* Orbiting particles - enhanced for galaxy effect */}
+        {[0, 1, 2, 3, 4, 5].map((particle) => (
+          <div
+            key={particle}
+            className="absolute pointer-events-none z-45 transition-all duration-1000 ease-out"
+            style={{
+              left: `${mousePosition.x}px`,
+              top: `${mousePosition.y}px`,
+              transform: `translate(-50%, -50%) rotate(${particle * 60}deg) translateX(${hoveredLetter !== null ? 30 : 15}px) rotate(-${particle * 60}deg)`,
+              transitionDelay: `${particle * 100}ms`,
+            }}
+          >
+            <div
+              className={`rounded-full blur-sm transition-all duration-500 ${
+                hoveredLetter !== null
+                  ? `bg-gradient-to-r from-purple-400 to-pink-400 w-2 h-2 opacity-80 animate-bounce`
+                  : `bg-blue-300/40 w-1 h-1 opacity-60`
+              }`}
+              style={{ animationDelay: `${particle * 200}ms` }}
+            ></div>
+          </div>
+        ))}
+
+        {/* Spreading shine effect on hover */}
+        {hoveredLetter !== null && (
+          <>
+            {/* Large spreading circles */}
+            {[0, 1, 2].map((circle) => (
+              <div
+                key={`circle-${circle}`}
+                className="absolute pointer-events-none z-40 rounded-full border-2 border-purple-300/30 animate-spread"
+                style={{
+                  left: `${mousePosition.x}px`,
+                  top: `${mousePosition.y}px`,
+                  transform: 'translate(-50%, -50%)',
+                  width: `${20 + circle * 40}px`,
+                  height: `${20 + circle * 40}px`,
+                  animationDelay: `${circle * 200}ms`,
+                }}
+              />
+            ))}
+            
+            {/* Random sparkles */}
+            {[...Array(8)].map((_, sparkle) => (
+              <div
+                key={`sparkle-${sparkle}`}
+                className="absolute pointer-events-none z-45 rounded-full bg-white animate-twinkle"
+                style={{
+                  left: `${mousePosition.x}px`,
+                  top: `${mousePosition.y}px`,
+                  transform: `translate(-50%, -50%) rotate(${sparkle * 45}deg) translateX(${40 + Math.random() * 30}px)`,
+                  width: `${Math.random() * 3 + 1}px`,
+                  height: `${Math.random() * 3 + 1}px`,
+                  animationDelay: `${sparkle * 100}ms`,
+                }}
+              />
+            ))}
+          </>
         )}
-      </div>
+
+        {/* Custom cursor with image (only shows on letter hover) */}
+        <div
+          className={`absolute pointer-events-none z-50 transition-all duration-300 ${
+            hoveredLetter !== null ? "opacity-100 scale-100" : "opacity-0 scale-50"
+          }`}
+          style={{
+            left: `${mousePosition.x + 80}px`,
+            top: `${mousePosition.y + 80}px`,
+            transform: 'translate(-50%, -50%)',
+          }}
+        >
+          {hoveredLetter !== null && (
+            <div className="w-32 h-40 bg-gray-800 overflow-hidden rounded-lg shadow-2xl border-2 border-white/50 backdrop-blur-sm">
+              <img 
+                src={letterImages[hoveredLetter]} 
+                alt={`Letter ${letters[hoveredLetter]}`}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          )}
+        </div>
+      </>
     );
   };
 
@@ -142,32 +270,87 @@ const CreativeDesignerHero: React.FC = () => {
 
   return (
     <section 
+      ref={sectionRef}
       className="w-full min-h-screen bg-black text-white overflow-hidden relative"
       onMouseMove={handleMouseMove}
     >
+      {/* Custom CSS for animations */}
+      <style>
+        {`
+          @keyframes spread {
+            0% {
+              transform: translate(-50%, -50%) scale(0);
+              opacity: 1;
+            }
+            100% {
+              transform: translate(-50%, -50%) scale(1);
+              opacity: 0;
+            }
+          }
+          @keyframes twinkle {
+            0%, 100% {
+              opacity: 0;
+              transform: translate(-50%, -50%) scale(0);
+            }
+            50% {
+              opacity: 1;
+              transform: translate(-50%, -50%) scale(1);
+            }
+          }
+          .animate-spread {
+            animation: spread 1.5s ease-out forwards;
+          }
+          .animate-twinkle {
+            animation: twinkle 1s ease-in-out infinite;
+          }
+        `}
+      </style>
+
       {/* YouTube Video Background */}
       <div 
         ref={videoRef}
         className="absolute inset-0 z-0 overflow-hidden"
       >
         <div className="relative w-full h-full">
-          <iframe
-            src="https://www.youtube.com/embed/Gsc0HtG6rTc?autoplay=1&mute=1&loop=1&playlist=Gsc0HtG6rTc&controls=0&showinfo=0&rel=0&modestbranding=1"
-            className="absolute top-0 left-0 w-full h-full scale-150"
-            style={{ 
-              transform: 'scale(1.2)',
-              pointerEvents: 'none'
-            }}
-            allow="autoplay; encrypted-media"
-            allowFullScreen
-            title="Background Video"
-          />
+          {/* Mobile Video (Portrait Optimized) */}
+          <div className="lg:hidden absolute inset-0">
+            <iframe
+              src="https://www.youtube.com/embed/Gsc0HtG6rTc?autoplay=1&mute=1&loop=1&playlist=Gsc0HtG6rTc&controls=0&showinfo=0&rel=0&modestbranding=1"
+              className="absolute top-1/2 left-1/2 w-[180%] h-[120%]"
+              style={{ 
+                transform: 'translate(-50%, -50%) scale(1.4)',
+                pointerEvents: 'none',
+                minWidth: '100vw',
+                minHeight: '100vh',
+                objectFit: 'cover'
+              }}
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+              title="Background Video Mobile"
+            />
+          </div>
+          
+          {/* Desktop Video */}
+          <div className="hidden lg:block absolute inset-0">
+            <iframe
+              src="https://www.youtube.com/embed/Gsc0HtG6rTc?autoplay=1&mute=1&loop=1&playlist=Gsc0HtG6rTc&controls=0&showinfo=0&rel=0&modestbranding=1"
+              className="absolute top-0 left-0 w-full h-full scale-150"
+              style={{ 
+                transform: 'scale(1.2)',
+                pointerEvents: 'none'
+              }}
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+              title="Background Video Desktop"
+            />
+          </div>
+          
           {/* Overlay to improve text readability */}
           <div className="absolute inset-0 bg-black bg-opacity-60"></div>
         </div>
       </div>
 
-      <CustomCursor />
+      <GalaxyCursor />
       
       {/* Content Container */}
       <div className="relative z-10 w-full min-h-screen px-[2vw] sm:px-[3vw] lg:px-[4vw] py-[2vw] lg:py-[4vw]">

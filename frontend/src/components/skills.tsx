@@ -100,7 +100,7 @@ export default function VerticalConnectList() {
                     : "border-transparent"
                 }`}
                 style={{
-                  width: isActive ? '85%' : '0%',
+                  width: isActive ? '95%' : '0%',
                   height: isActive ? '80%' : '0%',
                   left: '50%',
                   top: '50%',

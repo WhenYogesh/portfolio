@@ -102,13 +102,13 @@ const VeggieTDesigner: React.FC = () => {
             backgroundImage: `url(${slides[currentSlide].image})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            filter: 'grayscale(60%) brightness(0.2)',
+            filter: 'grayscale(50%) brightness(0.7)',
             transform: `scale(1.02)`,
           }}
         />
         
         {/* Animated Glow Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-transparent to-white/5 animate-pulse-slow" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/2 via-transparent to-white/5 animate-pulse-slow" />
         
         {/* Content Overlay */}
         <div className="relative z-10 h-full flex items-center justify-center px-8">
@@ -119,10 +119,10 @@ const VeggieTDesigner: React.FC = () => {
                 className="text-5xl md:text-8xl font-black text-white mb-4 tracking-tight transform transition-all duration-700 ease-out hover:scale-105"
                 style={{
                   textShadow: `
-                    0 0 10px rgba(0, 0, 0, 0.8),
-                    0 0 20px rgba(255, 255, 255, 0.6),
-                    0 0 30px rgba(255, 255, 255, 0.4),
-                    0 0 40px rgba(255, 255, 255, 0.2)
+                    0 0 10px rgba(22, 17, 17, 0.8),
+                    0 0 20px rgba(12, 7, 7, 0.99),
+                    0 0 30px rgba(255, 255, 255, 0.15),
+                    0 0 40px rgba(0, 0, 0, 0.2)
                   `,
                   filter: 'brightness(5) contrast(1.1)',
                   transform: isAnimating ? 'translateY(100px) opacity-0' : 'translateY(0) opacity-100',
@@ -139,7 +139,7 @@ const VeggieTDesigner: React.FC = () => {
                 className="text-2xl md:text-4xl font-bold text-white transform transition-all duration-700 ease-out delay-200 hover:translate-x-2 hover:scale-105"
                 style={{
                   textShadow: `
-                    0 0 8px rgba(255, 255, 255, 0.75),
+                    0 0 8px rgba(12, 12, 12, 0.75),
                     0 0 16px rgba(255, 255, 255, 0.5),
                     0 0 24px rgba(255, 255, 255, 0.3)
                   `,
@@ -161,7 +161,7 @@ const VeggieTDesigner: React.FC = () => {
                     0 0 6px rgba(255, 255, 255, 0.6),
                     0 0 12px rgba(255, 255, 255, 0.4)
                   `,
-                  filter: 'brightness(1.05)',
+                  filter: 'brightness(1)',
                   transform: isAnimating ? 'translateY(50px) opacity-0' : 'translateY(0) opacity-100',
                   transition: 'transform 0.8s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.8s ease-out'
                 }}
@@ -176,11 +176,11 @@ const VeggieTDesigner: React.FC = () => {
                 className="text-lg md:text-xl text-white font-mono transform transition-all duration-700 ease-out delay-400 hover:translate-x-4 hover:skew-x-2"
                 style={{
                   textShadow: `
-                    0 0 5px rgba(255, 255, 255, 0.8),
-                    0 0 10px rgba(255, 255, 255, 0.6),
+                    0 0 5px rgba(0, 0, 0, 0),
+                    0 0 10px rgba(61, 61, 61, 0.6),
                     0 0 15px rgba(255, 255, 255, 0.4)
                   `,
-                  filter: 'brightness(1.1)',
+                  filter: 'brightness(1)',
                   transform: isAnimating ? 'translateX(100px) opacity-0' : 'translateX(0) opacity-100',
                   transition: 'transform 0.8s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.8s ease-out'
                 }}
