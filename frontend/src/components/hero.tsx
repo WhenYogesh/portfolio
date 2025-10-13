@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import Spline from '@splinetool/react-spline';
+import React, { useState, useRef, useEffect } from 'react';
 
 // Import all images at the top
 import letterW from '/images/bw.jpg';
@@ -17,8 +16,8 @@ import profileImage from '/images/bw.jpg';
 const CreativeDesignerHero: React.FC = () => {
   const [hoveredLetter, setHoveredLetter] = useState<number | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [, setSplineLoaded] = useState(false);
-  const [splineError, setSplineError] = useState(false);
+  const videoRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
 
   const title = "WEB DEVELOPER";
   const letters = title.split('');
@@ -56,6 +55,32 @@ const CreativeDesignerHero: React.FC = () => {
     letterR2, // R (using E as placeholder)
   ];
 
+  // Function to adjust font size for full width
+  const adjustFontSize = () => {
+    if (titleRef.current) {
+      const container = titleRef.current.parentElement;
+      if (container) {
+        const containerWidth = container.offsetWidth;
+        const currentFontSize = parseFloat(getComputedStyle(titleRef.current).fontSize);
+        const textWidth = titleRef.current.scrollWidth;
+        
+        if (textWidth > containerWidth) {
+          const newFontSize = currentFontSize * (containerWidth / textWidth) * 0.95;
+          titleRef.current.style.fontSize = `${newFontSize}px`;
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    adjustFontSize();
+    window.addEventListener('resize', adjustFontSize);
+    
+    return () => {
+      window.removeEventListener('resize', adjustFontSize);
+    };
+  }, []);
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     setMousePosition({
       x: e.clientX,
@@ -69,14 +94,6 @@ const CreativeDesignerHero: React.FC = () => {
 
   const handleLetterLeave = () => {
     setHoveredLetter(null);
-  };
-
-  const handleSplineLoad = () => {
-    setSplineLoaded(true);
-  };
-
-  const handleSplineError = () => {
-    setSplineError(true);
   };
 
   // Custom cursor component with image
@@ -128,22 +145,26 @@ const CreativeDesignerHero: React.FC = () => {
       className="w-full min-h-screen bg-black text-white overflow-hidden relative"
       onMouseMove={handleMouseMove}
     >
-      {/* Spline Background */}
-      <div className="absolute inset-0 z-0">
-        {splineError ? (
-          <div className="w-full h-full flex items-center justify-center bg-gray-900">
-            <p className="text-lg text-white">3D Background failed to load</p>
-          </div>
-        ) : (
-          <Spline
-            scene="https://prod.spline.design/W-pVnC7XXJ34xj3E/scene.splinecode"
-            onLoad={handleSplineLoad}
-            onError={handleSplineError}
-            className="w-full h-full"
+      {/* YouTube Video Background */}
+      <div 
+        ref={videoRef}
+        className="absolute inset-0 z-0 overflow-hidden"
+      >
+        <div className="relative w-full h-full">
+          <iframe
+            src="https://www.youtube.com/embed/Gsc0HtG6rTc?autoplay=1&mute=1&loop=1&playlist=Gsc0HtG6rTc&controls=0&showinfo=0&rel=0&modestbranding=1"
+            className="absolute top-0 left-0 w-full h-full scale-150"
+            style={{ 
+              transform: 'scale(1.2)',
+              pointerEvents: 'none'
+            }}
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+            title="Background Video"
           />
-        )}
-        {/* Overlay to improve text readability */}
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+          {/* Overlay to improve text readability */}
+          <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+        </div>
       </div>
 
       <CustomCursor />
@@ -153,8 +174,12 @@ const CreativeDesignerHero: React.FC = () => {
         
         {/* Mobile/Tablet Version */}
         <div className="lg:hidden flex flex-col items-center justify-start min-h-screen pt-20">
-          <div className="mb-6 text-center mt-2">
-            <h1 className="text-[42px] leading-[0.85] font-black tracking-tighter mb-3 text-white">
+          <div className="mb-6 text-center mt-2 w-full">
+            <h1 
+              ref={titleRef}
+              className="text-[42px] leading-[0.85] font-black tracking-tighter mb-3 text-white w-full text-center"
+              style={{ fontSize: 'clamp(32px, 12vw, 72px)' }}
+            >
               {letters.map((letter, index) => (
                 <span key={index} className="inline-block">
                   {letter}
@@ -235,8 +260,15 @@ const CreativeDesignerHero: React.FC = () => {
           {/* Main Title and Image Container */}
           <div className="relative w-full pt-12">
             
-            {/* Title Text */}
-            <h1 className="max-w-full text-[120px] xl:text-[120px] 2xl:text-[240px] 4xl:text-[260px] leading-[0.82] font-black tracking-[-0.02em] cursor-default select-none whitespace-nowrap overflow-visible relative z-30 pt-8 text-white">
+            {/* Title Text - Made fully responsive */}
+            <h1 
+              ref={titleRef}
+              className="w-full text-center leading-[0.82] font-black tracking-[-0.02em] cursor-default select-none overflow-visible relative z-30 pt-8 text-white"
+              style={{ 
+                fontSize: 'clamp(80px, 15vw, 240px)',
+                whiteSpace: 'nowrap'
+              }}
+            >
               {letters.map((letter, index) => (
                 <span
                   key={index}
