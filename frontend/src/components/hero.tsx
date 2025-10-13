@@ -10,6 +10,8 @@ import letterV from '/images/bw.jpg';
 import letterL from '/images/color.jpg';
 import letterO from '/images/bw.jpg';
 import letterP from '/images/color.jpg';
+import letterE2 from '/images/bw.jpg';
+import letterR2 from '/images/color.jpg';
 import profileImage from '/images/bw.jpg';
 
 const CreativeDesignerHero: React.FC = () => {
@@ -50,8 +52,8 @@ const CreativeDesignerHero: React.FC = () => {
     letterL, // L
     letterO, // O
     letterP, // P
-    letterE, // E
-    letterE, // R (using E as placeholder)
+    letterE2, // E
+    letterR2, // R (using E as placeholder)
   ];
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {

@@ -1,8 +1,16 @@
 // VeggieTDesigner.tsx
 import React, { useEffect, useState } from 'react';
 
+// Import images - adjust these paths according to your project structure
+import pythonDeveloperImage from '/images/Gemini_Generated_Image_hd9dhqhd9dhqhd9d.png';
+import webScrapingImage from '/images/Gemini_Generated_Image_nldsh5nldsh5nlds.png';
+import webDesignImage from '/images/Gemini_Generated_Image_yjf1t5yjf1t5yjf1.png';
+import wordpressDevImage from '/images/Gemini_Generated_Image_yeu7cuyeu7cuyeu7.png';
+import apiDevelopmentImage from '/images/Gemini_Generated_Image_yjf1t5yjf1t5yjf1.png';
+
 const VeggieTDesigner: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const slides = [
     {
@@ -11,7 +19,7 @@ const VeggieTDesigner: React.FC = () => {
       subtitle: "SERVER ARCHITECTURE",
       description: "Building scalable Python backend systems with Django, FastAPI, and Flask",
       tech: "Python • Django • PostgreSQL • Redis",
-      image: "./src/assets/Gemini_Generated_Image_hd9dhqhd9dhqhd9d.png"
+      image: pythonDeveloperImage
     },
     {
       id: 2,
@@ -19,7 +27,7 @@ const VeggieTDesigner: React.FC = () => {
       subtitle: "DATA EXTRACTION",
       description: "Advanced web scraping solutions with BeautifulSoup, Scrapy, and Selenium",
       tech: "Scrapy • BeautifulSoup • Selenium • APIs",
-      image: "./src/assets/Gemini_Generated_Image_nldsh5nldsh5nlds.png"
+      image: webScrapingImage
     },
     {
       id: 3,
@@ -27,7 +35,7 @@ const VeggieTDesigner: React.FC = () => {
       subtitle: "UI/UX DESIGN",
       description: "Creating responsive web designs with modern frameworks and best practices",
       tech: "React • Tailwind • Figma • Responsive Design",
-      image: "./src/assets/Gemini_Generated_Image_72lhqo72lhqo72lh.png"
+      image: webDesignImage
     },
     {
       id: 4,
@@ -35,7 +43,7 @@ const VeggieTDesigner: React.FC = () => {
       subtitle: "DATA MODELING",
       description: "Designing efficient database schemas and optimizing queries for performance",
       tech: "SQL • MongoDB • Database Design • Optimization",
-      image: "./src/assets/Gemini_Generated_Image_yeu7cuyeu7cuyeu7.png"
+      image: wordpressDevImage
     },
     {
       id: 5,
@@ -43,42 +51,53 @@ const VeggieTDesigner: React.FC = () => {
       subtitle: "REST & GRAPHQL",
       description: "Building robust APIs with proper documentation and authentication systems",
       tech: "REST APIs • GraphQL • Authentication • Documentation",
-      image: "./src/assets/Gemini_Generated_Image_yjf1t5yjf1t5yjf1.png"
+      image: apiDevelopmentImage
     }
   ];
 
+  const handleSlideChange = (newSlide: number) => {
+    if (isAnimating) return;
+    
+    setIsAnimating(true);
+    setCurrentSlide(newSlide);
+    
+    // Reset animation state after transition
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 800);
+  };
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Only prevent default if we're actually changing slides
       if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
         e.preventDefault();
         if (e.key === 'ArrowRight') {
-          setCurrentSlide(prev => prev === slides.length - 1 ? 0 : prev + 1);
+          handleSlideChange(currentSlide === slides.length - 1 ? 0 : currentSlide + 1);
         } else if (e.key === 'ArrowLeft') {
-          setCurrentSlide(prev => prev === 0 ? slides.length - 1 : prev - 1);
+          handleSlideChange(currentSlide === 0 ? slides.length - 1 : currentSlide - 1);
         }
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [slides.length]);
+  }, [currentSlide, slides.length]);
 
   const nextSlide = () => {
-    setCurrentSlide(prev => prev === slides.length - 1 ? 0 : prev + 1);
+    handleSlideChange(currentSlide === slides.length - 1 ? 0 : currentSlide + 1);
   };
 
   const prevSlide = () => {
-    setCurrentSlide(prev => prev === 0 ? slides.length - 1 : prev - 1);
+    handleSlideChange(currentSlide === 0 ? slides.length - 1 : currentSlide - 1);
   };
 
   return (
-    <div className="w-full min-h-screen bg-black">
+    <div className="w-full min-h-screen bg-white">
       {/* Hero Section with Slides */}
       <section className="h-screen relative overflow-hidden">
         {/* Background Image */}
         <div 
-          className="absolute inset-0 transition-all duration-700 ease-out"
+          className="absolute inset-0 transition-all duration-1000 ease-out"
           style={{
             backgroundImage: `url(${slides[currentSlide].image})`,
             backgroundSize: 'cover',
@@ -88,72 +107,163 @@ const VeggieTDesigner: React.FC = () => {
           }}
         />
         
+        {/* Animated Glow Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-transparent to-white/5 animate-pulse-slow" />
+        
         {/* Content Overlay */}
         <div className="relative z-10 h-full flex items-center justify-center px-8">
           <div className="text-center max-w-4xl">
-            {/* Main Title */}
-            <h1 className="text-5xl md:text-8xl font-black text-white mb-4 tracking-tight">
-              {slides[currentSlide].title}
-            </h1>
+            {/* Main Title with Scroll Animation */}
+            <div className="overflow-hidden mb-4">
+              <h1 
+                className="text-5xl md:text-8xl font-black text-white mb-4 tracking-tight transform transition-all duration-700 ease-out hover:scale-105"
+                style={{
+                  textShadow: `
+                    0 0 10px rgba(0, 0, 0, 0.8),
+                    0 0 20px rgba(255, 255, 255, 0.6),
+                    0 0 30px rgba(255, 255, 255, 0.4),
+                    0 0 40px rgba(255, 255, 255, 0.2)
+                  `,
+                  filter: 'brightness(5) contrast(1.1)',
+                  transform: isAnimating ? 'translateY(100px) opacity-0' : 'translateY(0) opacity-100',
+                  transition: 'transform 0.8s cubic-bezier(0.23, 1, 0.32, 1), opacity 9.8s ease-out'
+                }}
+              >
+                {slides[currentSlide].title}
+              </h1>
+            </div>
             
-            {/* Subtitle */}
-            <h2 className="text-2xl md:text-4xl font-bold text-gray-200 mb-8">
-              {slides[currentSlide].subtitle}
-            </h2>
+            {/* Subtitle with Slide Animation */}
+            <div className="overflow-hidden mb-8">
+              <h2 
+                className="text-2xl md:text-4xl font-bold text-white transform transition-all duration-700 ease-out delay-200 hover:translate-x-2 hover:scale-105"
+                style={{
+                  textShadow: `
+                    0 0 8px rgba(255, 255, 255, 0.75),
+                    0 0 16px rgba(255, 255, 255, 0.5),
+                    0 0 24px rgba(255, 255, 255, 0.3)
+                  `,
+                  filter: 'brightness(1)',
+                  transform: isAnimating ? 'translateX(-100px) opacity-0' : 'translateX(0) opacity-100',
+                  transition: 'transform 0.8s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.8s ease-out'
+                }}
+              >
+                {slides[currentSlide].subtitle}
+              </h2>
+            </div>
             
-            {/* Description */}
-            <p className="text-xl md:text-2xl text-gray-200 mb-6 max-w-2xl mx-auto leading-relaxed">
-              {slides[currentSlide].description}
-            </p>
+            {/* Description with Fade Up Animation */}
+            <div className="overflow-hidden mb-6">
+              <p 
+                className="text-xl md:text-2xl text-white max-w-2xl mx-auto leading-relaxed transform transition-all duration-700 ease-out delay-300 hover:translate-y-1 hover:scale-102"
+                style={{
+                  textShadow: `
+                    0 0 6px rgba(255, 255, 255, 0.6),
+                    0 0 12px rgba(255, 255, 255, 0.4)
+                  `,
+                  filter: 'brightness(1.05)',
+                  transform: isAnimating ? 'translateY(50px) opacity-0' : 'translateY(0) opacity-100',
+                  transition: 'transform 0.8s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.8s ease-out'
+                }}
+              >
+                {slides[currentSlide].description}
+              </p>
+            </div>
             
-            {/* Tech Stack */}
-            <p className="text-lg md:text-xl text-gray-300 mb-12 font-mono">
-              {slides[currentSlide].tech}
-            </p>
+            {/* Tech Stack with Typewriter Effect */}
+            <div className="overflow-hidden mb-12">
+              <p 
+                className="text-lg md:text-xl text-white font-mono transform transition-all duration-700 ease-out delay-400 hover:translate-x-4 hover:skew-x-2"
+                style={{
+                  textShadow: `
+                    0 0 5px rgba(255, 255, 255, 0.8),
+                    0 0 10px rgba(255, 255, 255, 0.6),
+                    0 0 15px rgba(255, 255, 255, 0.4)
+                  `,
+                  filter: 'brightness(1.1)',
+                  transform: isAnimating ? 'translateX(100px) opacity-0' : 'translateX(0) opacity-100',
+                  transition: 'transform 0.8s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.8s ease-out'
+                }}
+              >
+                {slides[currentSlide].tech}
+              </p>
+            </div>
 
-            {/* Navigation Dots */}
+            {/* Navigation Dots with Glow Effect */}
             <div className="flex justify-center gap-3 mb-8">
               {slides.map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => setCurrentSlide(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  onClick={() => handleSlideChange(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 transform hover:scale-150 ${
                     index === currentSlide 
-                      ? 'bg-white scale-125' 
-                      : 'bg-gray-600 hover:bg-gray-400'
+                      ? 'bg-white scale-125 shadow-glow' 
+                      : 'bg-gray-400 hover:bg-white hover:shadow-glow'
                   }`}
+                  style={{
+                    boxShadow: index === currentSlide ? 
+                      '0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6)' : 
+                      'none'
+                  }}
                 />
               ))}
             </div>
 
-            {/* Navigation Buttons */}
+            {/* Navigation Buttons with Enhanced Glow */}
             <div className="flex justify-center gap-4">
               <button
                 onClick={prevSlide}
-                className="px-12 py-3 bg-white bg-opacity-20 hover:bg-opacity-30 text-white font-semibold rounded-lg transition-all duration-300 backdrop-blur-sm border border-white border-opacity-30"
+                className="px-12 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 text-white font-semibold rounded-lg transition-all duration-300 backdrop-blur-sm border border-white border-opacity-30 transform hover:scale-105 hover:-translate-x-2 group relative overflow-hidden"
+                style={{
+                  textShadow: '0 0 8px rgba(255, 255, 255, 0.6)',
+                  boxShadow: '0 0 15px rgba(255, 255, 255, 0.3)'
+                }}
               >
-                ← PREV
+                <span className="relative z-10 group-hover:scale-105 transition-transform duration-300">
+                  ← PREV
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
               </button>
+              
               <button
                 onClick={nextSlide}
-                className="px-12 py-3 bg-white bg-opacity-20 hover:bg-opacity-30 text-white font-semibold rounded-lg transition-all duration-300 backdrop-blur-sm border border-white border-opacity-30"
+                className="px-12 py-3 bg-white bg-opacity-10 hover:bg-opacity-20 text-white font-semibold rounded-lg transition-all duration-300 backdrop-blur-sm border border-white border-opacity-30 transform hover:scale-105 hover:translate-x-2 group relative overflow-hidden"
+                style={{
+                  textShadow: '0 0 8px rgba(255, 255, 255, 0.6)',
+                  boxShadow: '0 0 15px rgba(255, 255, 255, 0.3)'
+                }}
               >
-                NEXT →
+                <span className="relative z-10 group-hover:scale-105 transition-transform duration-300">
+                  NEXT →
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
               </button>
             </div>
           </div>
         </div>
 
-        {/* Slide Counter */}
+        {/* Slide Counter with Glow */}
         <div className="absolute bottom-8 right-8 z-20">
-          <div className="text-white text-xl font-mono bg-black bg-opacity-50 px-4 py-2 rounded-lg">
+          <div 
+            className="text-white text-xl font-mono bg-black bg-opacity-50 px-4 py-2 rounded-lg border border-white border-opacity-20 transform hover:scale-110 transition-all duration-300"
+            style={{
+              textShadow: '0 0 8px rgba(255, 255, 255, 0.6)',
+              boxShadow: '0 0 15px rgba(255, 255, 255, 0.2)'
+            }}
+          >
             {currentSlide + 1} / {slides.length}
           </div>
         </div>
 
-        {/* Instructions */}
+        {/* Instructions with Subtle Glow */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 text-center">
-          <p className="text-white text-sm bg-black bg-opacity-50 px-4 py-2 rounded-lg">
+          <p 
+            className="text-white text-sm bg-black bg-opacity-50 px-4 py-2 rounded-lg border border-white border-opacity-20 transform hover:scale-105 transition-all duration-300"
+            style={{
+              textShadow: '0 0 5px rgba(255, 255, 255, 0.5)',
+              boxShadow: '0 0 10px rgba(255, 255, 255, 0.1)'
+            }}
+          >
             Use ← → arrow keys or click buttons to navigate
           </p>
         </div>

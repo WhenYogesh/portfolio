@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 // Import the image for production
-import backgroundImage from '/images/Gemini_Generated_Image_72lhqo72lhqo72lh copy.png';
+import backgroundImage from '/images/Gemini_Generated_Image_yjf1t5yjf1t5yjf1.png';
 
 const AboutHeroSection: React.FC = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
