@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 import Spline from '@splinetool/react-spline';
 
+// Import all images at the top
+import letterW from '/images/bw.jpg';
+import letterE from '/images/color.jpg';
+import letterB from '/images/bw.jpg';
+import letterD from '/images/color.jpg';
+import letterV from '/images/bw.jpg';
+import letterL from '/images/color.jpg';
+import letterO from '/images/bw.jpg';
+import letterP from '/images/color.jpg';
+import profileImage from '/images/bw.jpg';
+
 const CreativeDesignerHero: React.FC = () => {
   const [hoveredLetter, setHoveredLetter] = useState<number | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -17,7 +28,6 @@ const CreativeDesignerHero: React.FC = () => {
     { title: "/WORDPRESS DEVELOPMENT", key: 3 },
   ];   
 
-
   // Right side services (3 items)
   const rightServices = [
     { title: "/UI/UX DESIGNER", key: 4 },
@@ -28,20 +38,20 @@ const CreativeDesignerHero: React.FC = () => {
   // All services for mobile view
   const allServices = [...leftServices, ...rightServices];
 
-  // Different images for different letters
+  // Different images for different letters using imported images
   const letterImages = [
-    "./src/assets/bw.jpg", // W
-    "./src/assets/color.jpg", // E
-    "./src/assets/bw.jpg", // B
-    "./src/assets/color.jpg", // D
-    "./src/assets/bw.jpg", // E
-    "./src/assets/color.jpg", // V
-    "./src/assets/bw.jpg", // E
-    "./src/assets/color.jpg", // L
-    "./src/assets/bw.jpg", // O
-    "./src/assets/color.jpg", // P
-    "./src/assets/bw.jpg", // E
-    "./src/assets/color.jpg", // R
+    letterW, // W
+    letterE, // E
+    letterB, // B
+    letterD, // D
+    letterE, // E
+    letterV, // V
+    letterE, // E
+    letterL, // L
+    letterO, // O
+    letterP, // P
+    letterE, // E
+    letterE, // R (using E as placeholder)
   ];
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -159,7 +169,7 @@ const CreativeDesignerHero: React.FC = () => {
             {/* Image */}
             <div className="w-[220px] aspect-[3/4] bg-gray-800 overflow-hidden rounded-lg">
               <img 
-                src="./src/assets/color.jpg" 
+                src={profileImage} 
                 alt="Creative Designer"
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
               />
@@ -243,7 +253,7 @@ const CreativeDesignerHero: React.FC = () => {
             {/* Image */}
             <div className="absolute lg:left-[36%] xl:left-[40%] 2xl:left-[%] lg:top-[200px] xl:top-[220px] 2xl:top-[200px] w-[300px] xl:w-[360px] 2xl:w-[450px] aspect-[3/4] bg-gray-800 overflow-hidden z-10 rounded-lg shadow-xl">
               <img 
-                src="./src/assets/color.jpg" 
+                src={profileImage} 
                 alt="Creative Designer"
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
               />

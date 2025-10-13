@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './components/header';
-import Hero from './components/hero';
+import CreativeDesignerHero from './components/hero';
 import AboutHeroSection from './components/aboutme';
 import AutoHorizontalScrollPortfolio from './components/projects';
 import VeggieTDesigner from './components/veggiedesigner';
@@ -12,7 +12,7 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen">
       <Header />
-      <Hero />
+      <CreativeDesignerHero />
       <AboutHeroSection />
       <AutoHorizontalScrollPortfolio />
       <VeggieTDesigner />

@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
+// Import the image for production
+import backgroundImage from '/images/Gemini_Generated_Image_72lhqo72lhqo72lh copy.png';
 
 const AboutHeroSection: React.FC = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -110,7 +112,6 @@ const AboutHeroSection: React.FC = () => {
           .bg-layer {
             position: absolute;
             inset: 0;
-            background-image: url('./src/assets/Gemini_Generated_Image_72lhqo72lhqo72lh.png');
             background-size: cover;
             background-position: center;
             opacity: 0;
@@ -160,8 +161,11 @@ const AboutHeroSection: React.FC = () => {
         ref={sectionRef}
         className="about-section w-full min-h-screen bg-[#e8e6df] flex items-center justify-center px-6 py-20 relative"
       >
-        {/* background masked layer */}
-        <div className={`bg-layer ${showBackground ? 'visible' : ''}`} />
+        {/* background masked layer with imported image */}
+        <div 
+          className={`bg-layer ${showBackground ? 'visible' : ''}`} 
+          style={{ backgroundImage: `url(${backgroundImage})` }}
+        />
 
         {/* optional spotlight element (purely decorative) */}
         {showBackground && (
