@@ -132,9 +132,10 @@ const AutoHorizontalScrollPortfolio: React.FC = () => {
       ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
       { threshold: 0.1 }
     );
-    if (containerRef.current) observer.observe(containerRef.current);
+    const node = containerRef.current;
+    if (node) observer.observe(node);
     return () => observer.disconnect();
-  }, []);
+  }, [isLargeScreen]);
 
   const handleScroll = useCallback(() => {
     const container = containerRef.current;
@@ -195,7 +196,7 @@ const AutoHorizontalScrollPortfolio: React.FC = () => {
   // Mobile
   if (!isLargeScreen) {
     return (
-      <section id="projects" className="w-full bg-transparent section-padding">
+      <section id="projects" ref={containerRef} className="w-full bg-transparent section-padding">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <p className="text-xs sm:text-sm tracking-[0.3em] uppercase text-violet-400 font-semibold mb-4">

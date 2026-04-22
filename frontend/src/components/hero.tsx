@@ -255,33 +255,33 @@ const CreativeDesignerHero: React.FC = () => {
       <div className="relative z-10 w-full min-h-screen px-4 sm:px-6 lg:px-8 xl:px-12 py-8 lg:py-12">
 
         {/* ── MOBILE / TABLET ── */}
-        <div className="lg:hidden flex flex-col items-center justify-center min-h-screen pt-28 pb-8">
+        <div className="lg:hidden flex flex-col items-center justify-center w-full pt-24 pb-12 mt-4">
           {/* Badge */}
-          <div className={`mb-6 ${isLoaded ? 'hero-animate' : 'opacity-0'}`} style={{ animationDelay: '0.1s' }}>
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-xs font-semibold tracking-widest uppercase">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <div className={`mb-4 ${isLoaded ? 'hero-animate' : 'opacity-0'}`} style={{ animationDelay: '0.1s' }}>
+            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-[10px] font-bold tracking-widest uppercase">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               Available for work
             </span>
           </div>
 
           {/* Title */}
-          <div className={`mb-4 text-center w-full ${isLoaded ? 'hero-animate' : 'opacity-0'}`} style={{ animationDelay: '0.3s' }}>
-            <h1 className="font-black tracking-tighter text-white leading-[0.9]" style={{ fontSize: 'clamp(48px, 16vw, 90px)' }}>
+          <div className={`mb-2 text-center w-full ${isLoaded ? 'hero-animate' : 'opacity-0'}`} style={{ animationDelay: '0.3s' }}>
+            <h1 className="font-black tracking-tighter text-white leading-[0.95]" style={{ fontSize: 'clamp(42px, 14vw, 80px)' }}>
               <span className="block">YOGESH</span>
               <span className="block bg-gradient-to-r from-violet-400 to-pink-400 bg-clip-text text-transparent">V</span>
             </h1>
           </div>
 
           {/* Subtitle */}
-          <div className={`mb-6 text-center ${isLoaded ? 'hero-animate' : 'opacity-0'}`} style={{ animationDelay: '0.5s' }}>
-            <p className="text-lg sm:text-xl font-bold text-gray-300 mb-2">Backend Developer</p>
-            <p className="text-xs tracking-[0.3em] font-light text-gray-500 uppercase">Bengaluru, India</p>
+          <div className={`mb-8 text-center ${isLoaded ? 'hero-animate' : 'opacity-0'}`} style={{ animationDelay: '0.5s' }}>
+            <p className="text-base sm:text-lg font-bold text-gray-300 mb-1.5">Backend Developer</p>
+            <p className="text-[10px] sm:text-xs tracking-[0.3em] font-medium text-gray-500 uppercase">Bengaluru, India</p>
           </div>
 
           {/* Solar orrery (mobile) – small version around image */}
-          <div className={`mb-8 relative ${isLoaded ? 'hero-scale' : 'opacity-0'}`} style={{ animationDelay: '0.6s' }}>
+          <div className={`mb-10 relative ${isLoaded ? 'hero-scale' : 'opacity-0'}`} style={{ animationDelay: '0.6s' }}>
             {/* Orbit rings */}
-            {[100, 130, 160].map((r, i) => (
+            {[80, 110, 140].map((r, i) => (
               <div key={i} className="absolute rounded-full border border-violet-500/10 pointer-events-none"
                 style={{ width: r * 2, height: r * 2, top: '50%', left: '50%', transform: 'translate(-50%,-50%)', animation: i % 2 === 0 ? 'spin-slow 40s linear infinite' : 'spin-reverse 55s linear infinite' }}>
                 <span className="absolute rounded-full" style={{
@@ -292,7 +292,7 @@ const CreativeDesignerHero: React.FC = () => {
                 }} />
               </div>
             ))}
-            <div className="w-48 sm:w-56 aspect-[3/4] rounded-2xl overflow-hidden border border-white/10 shadow-xl shadow-violet-500/10 relative group"
+            <div className="w-40 sm:w-48 aspect-[3/4] rounded-2xl overflow-hidden border border-white/10 shadow-xl shadow-violet-500/10 relative group mx-auto"
               style={{ animation: 'orbit-pulse 4s ease-in-out infinite' }}>
               <img src={profileImage} alt="Yogesh V" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
@@ -300,9 +300,9 @@ const CreativeDesignerHero: React.FC = () => {
           </div>
 
           {/* Services */}
-          <div className={`text-center space-y-2 px-4 mb-8 ${isLoaded ? 'hero-animate' : 'opacity-0'}`} style={{ animationDelay: '0.8s' }}>
+          <div className={`text-center space-y-1.5 px-4 mb-8 ${isLoaded ? 'hero-animate' : 'opacity-0'}`} style={{ animationDelay: '0.8s' }}>
             {allServices.map((s) => (
-              <p key={s.key} className="text-sm sm:text-base font-bold tracking-tight text-gray-400 hover:text-white transition-colors duration-300">{s.title}</p>
+              <p key={s.key} className="text-[13px] sm:text-sm font-bold tracking-wide text-gray-400 hover:text-white transition-colors duration-300">{s.title}</p>
             ))}
           </div>
 
