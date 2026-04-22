@@ -1,0 +1,38 @@
+/* VeggieTDesigner.css — Scoped styles only */
+
+/* Scope everything to .veggie-section to prevent global leakage */
+.veggie-section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Smooth slide transitions */
+.veggie-section .slide-bg {
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+}
+
+/* Button shimmer effect */
+.veggie-section .btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.veggie-section .btn-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: transform 0.7s ease;
+}
+
+.veggie-section .btn-shimmer:hover::after {
+  transform: translateX(100%);
+}
