@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* VeggieTDesigner.css — Scoped styles only */
 
 /* Scope everything to .veggie-section to prevent global leakage */
@@ -36,3 +37,39 @@
 .veggie-section .btn-shimmer:hover::after {
   transform: translateX(100%);
 }
+=======
+/* VeggieTDesigner.css */
+
+/* Important: This forces the main component container (100vh) to not be scrollable, 
+   allowing the body/document to scroll the large placeholder div. */
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    /* Optional: Ensure the entire background is black or matches your fixed hero section background */
+    background-color: #000; 
+    overflow-x: hidden; /* Prevents unwanted horizontal scrollbar */
+}
+
+/* Optional: Scroll-snap for a smoother, paginated feel */
+html {
+    scroll-snap-type: y mandatory;
+}
+
+/* Scroll-snap targets the vertical height sections created by the placeholder div */
+.VeggieTDesigner-scroll-snap-section { 
+    scroll-snap-align: start;
+    height: 100vh; /* This class is implicitly applied by the 100vh unit per slide */
+}
+
+/* Use smooth scroll-behavior for programmatic scrolling (e.g., when clicking dots/buttons) */
+body {
+    scroll-behavior: smooth;
+}
+
+/* Apply scroll-snap to the document's scrolling element */
+.VeggieTDesigner-scroll-placeholder > div {
+    scroll-snap-align: start;
+}
+
+>>>>>>> 7ed862beeeff71a3961184ecc21deb126379068c

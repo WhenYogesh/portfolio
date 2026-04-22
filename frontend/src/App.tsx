@@ -1,11 +1,17 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import Header from './components/header';
 import SpaceBackground from './components/SpaceBackground';
+=======
+import React from 'react';
+import Header from './components/header';
+>>>>>>> 7ed862beeeff71a3961184ecc21deb126379068c
 import CreativeDesignerHero from './components/hero';
 import AboutHeroSection from './components/aboutme';
 import AutoHorizontalScrollPortfolio from './components/projects';
 import VerticalConnectList from './components/skills';
 import VeggieTDesigner from './components/veggiedesigner';
+<<<<<<< HEAD
 import Experience from './components/Experience';
 import Education from './components/Education';
 import Testimonials from './components/Testimonials';
@@ -57,6 +63,21 @@ const App: React.FC = () => {
           <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
         </svg>
       </button>
+=======
+import './index.css';
+
+// src/App.tsx
+
+const App: React.FC = () => {
+  return (
+    <div className="min-h-screen">
+      <Header />
+      <CreativeDesignerHero />
+      <AboutHeroSection />
+      <VerticalConnectList />
+      <AutoHorizontalScrollPortfolio />
+      <VeggieTDesigner />
+>>>>>>> 7ed862beeeff71a3961184ecc21deb126379068c
     </div>
   );
 };
