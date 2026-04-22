@@ -112,25 +112,15 @@ const AboutHeroSection: React.FC = () => {
             background-size: cover;
             background-position: center;
             opacity: 0;
-<<<<<<< HEAD
-            transition: opacity 0.3s ease-in-out;
-            pointer-events: none;
-            z-index: 1;
-=======
             transition: opacity 0.28s ease-in-out;
             pointer-events: none;
             z-index: 1;
 
             /* radial mask centered at CSS vars --mx / --my */
->>>>>>> 7ed862beeeff71a3961184ecc21deb126379068c
             -webkit-mask-image: radial-gradient(circle var(--spot-size) at var(--mx) var(--my), black 0%, rgba(0,0,0,0.9) 55%, transparent 75%);
             mask-image: radial-gradient(circle var(--spot-size) at var(--mx) var(--my), black 0%, rgba(0,0,0,0.9) 55%, transparent 75%);
             -webkit-mask-repeat: no-repeat;
             mask-repeat: no-repeat;
-<<<<<<< HEAD
-          }
-          .bg-layer.visible { opacity: 1; }
-=======
             -webkit-mask-position: 0 0;
             mask-position: 0 0;
           }
@@ -139,7 +129,6 @@ const AboutHeroSection: React.FC = () => {
           .bg-layer.visible { opacity: 1; }
 
           /* Decorative spotlight (optional) */
->>>>>>> 7ed862beeeff71a3961184ecc21deb126379068c
           .cursor-spotlight {
             position: absolute;
             width: var(--spot-size);
@@ -148,15 +137,7 @@ const AboutHeroSection: React.FC = () => {
             pointer-events: none;
             z-index: 2;
             transform: translate(-50%, -50%);
-<<<<<<< HEAD
             background: radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 70%);
-          }
-          .content-wrap { position: relative; z-index: 10; }
-          @media (max-width: 1023px) {
-            .about-section, .about-section * { cursor: default; }
-            .cursor-spotlight { display: none !important; }
-            .bg-layer { display: none !important; }
-=======
             transition: opacity 0.12s ease;
           }
 
@@ -168,8 +149,7 @@ const AboutHeroSection: React.FC = () => {
             .about-section, .about-section * { cursor: default; }
             .cursor-spotlight { display: none !important; }
             .bg-layer { display: none !important; } /* completely remove background on mobile */
-            .about-section { background-color: #ffffff !important; } /* ensure white on mobile */
->>>>>>> 7ed862beeeff71a3961184ecc21deb126379068c
+            .about-section { background-color: transparent !important; } /* revert back to transparent since it's dark theme */
           }
         `,
         }}

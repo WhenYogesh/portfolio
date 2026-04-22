@@ -1,208 +1,193 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './veggiedesigner.css';
+import React, { useEffect, useRef, useState } from 'react';
 
-import pythonDeveloperImage from '/images/Gemini_Generated_Image_hd9dhqhd9dhqhd9d.png';
-import webScrapingImage from '/images/Gemini_Generated_Image_nldsh5nldsh5nlds.png';
-import webDesignImage from '/images/Gemini_Generated_Image_yjf1t5yjf1t5yjf1.png';
-import wordpressDevImage from '/images/Gemini_Generated_Image_yeu7cuyeu7cuyeu7.png';
-import apiDevelopmentImage from '/images/Gemini_Generated_Image_yjf1t5yjf1t5yjf1.png';
+const services = [
+  {
+    id: 1,
+    title: 'BACKEND SYSTEMS',
+    subtitle: 'PYTHON • DJANGO • FASTAPI',
+    description: 'Building scalable backend systems with secure API endpoints, Google Authentication, user management, and efficient data processing.',
+    tech: ['FastAPI', 'Django', 'Flask', 'REST APIs'],
+    icon: '⚙️',
+    gradient: 'from-violet-500 to-indigo-500',
+    glow: 'rgba(139,92,246,0.3)',
+  },
+  {
+    id: 2,
+    title: 'WEB SCRAPING',
+    subtitle: 'DATA EXTRACTION & AUTOMATION',
+    description: 'Advanced web scraping solutions using Selectolax, BeautifulSoup, and Selenium for automated data collection and processing.',
+    tech: ['Selectolax', 'BeautifulSoup', 'Scrapy', 'Selenium'],
+    icon: '🕷️',
+    gradient: 'from-fuchsia-500 to-pink-500',
+    glow: 'rgba(217,70,239,0.3)',
+  },
+  {
+    id: 3,
+    title: 'WORDPRESS & WIX',
+    subtitle: 'CMS DEVELOPMENT',
+    description: 'Custom WordPress themes, WooCommerce stores, WIX sites with backend integrations, SEO optimization, and performance tuning.',
+    tech: ['WordPress', 'WIX', 'PHP', 'WooCommerce', 'SEO'],
+    icon: '🌐',
+    gradient: 'from-indigo-500 to-sky-500',
+    glow: 'rgba(99,102,241,0.3)',
+  },
+  {
+    id: 4,
+    title: 'REACT FRONTENDS',
+    subtitle: 'MODERN UI DEVELOPMENT',
+    description: 'Creating responsive, modern web interfaces using React.js with state management, component architecture, and smooth animations.',
+    tech: ['React', 'TypeScript', 'Tailwind CSS', 'Angular'],
+    icon: '🎨',
+    gradient: 'from-violet-400 to-fuchsia-500',
+    glow: 'rgba(167,139,250,0.3)',
+  },
+  {
+    id: 5,
+    title: 'API DEVELOPMENT',
+    subtitle: 'REST & AUTHENTICATION',
+    description: 'Building robust REST APIs with proper authentication (Google Auth), MongoDB/Redis integration, and comprehensive documentation.',
+    tech: ['REST APIs', 'MongoDB', 'Redis', 'Docker', 'Deployment'],
+    icon: '🔗',
+    gradient: 'from-pink-500 to-rose-500',
+    glow: 'rgba(236,72,153,0.3)',
+  },
+];
 
 const VeggieTDesigner: React.FC = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  const slides = [
-    {
-      id: 1,
-      title: 'BACKEND SYSTEMS',
-      subtitle: 'PYTHON • DJANGO • FASTAPI',
-      description: 'Building scalable backend systems with secure API endpoints, Google Authentication, user management, and efficient data processing.',
-      tech: 'FastAPI • Django • Flask • REST APIs',
-      image: pythonDeveloperImage,
-    },
-    {
-      id: 2,
-      title: 'WEB SCRAPING',
-      subtitle: 'DATA EXTRACTION & AUTOMATION',
-      description: 'Advanced web scraping solutions using Selectolax, BeautifulSoup, and Selenium for automated data collection and processing.',
-      tech: 'Selectolax • BeautifulSoup • Scrapy • Selenium',
-      image: webScrapingImage,
-    },
-    {
-      id: 3,
-      title: 'WORDPRESS & WIX',
-      subtitle: 'CMS DEVELOPMENT',
-      description: 'Custom WordPress themes, WooCommerce stores, WIX sites with backend integrations, SEO optimization, and performance tuning.',
-      tech: 'WordPress • WIX • PHP • WooCommerce • SEO',
-      image: wordpressDevImage,
-    },
-    {
-      id: 4,
-      title: 'REACT FRONTENDS',
-      subtitle: 'MODERN UI DEVELOPMENT',
-      description: 'Creating responsive, modern web interfaces using React.js with state management, component architecture, and smooth animations.',
-      tech: 'React • TypeScript • Tailwind CSS • Angular',
-      image: webDesignImage,
-    },
-    {
-      id: 5,
-      title: 'API DEVELOPMENT',
-      subtitle: 'REST & AUTHENTICATION',
-      description: 'Building robust REST APIs with proper authentication (Google Auth), MongoDB/Redis integration, and comprehensive documentation.',
-      tech: 'REST APIs • MongoDB • Redis • Docker • Deployment',
-      image: apiDevelopmentImage,
-    },
-  ];
+  const sectionRef = useRef<HTMLElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
-      { threshold: 0.2 }
+      (entries) => {
+        entries.forEach((entry) => {
+          const idx = Number(entry.target.getAttribute('data-idx'));
+          if (entry.isIntersecting) {
+            setVisibleCards((prev) => new Set(prev).add(idx));
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
     );
-    if (sectionRef.current) observer.observe(sectionRef.current);
+
+    cardRefs.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
+
     return () => observer.disconnect();
   }, []);
 
-  const handleSlideChange = (newSlide: number) => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setCurrentSlide(newSlide);
-    setTimeout(() => setIsAnimating(false), 800);
-  };
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight') {
-        e.preventDefault();
-        handleSlideChange(currentSlide === slides.length - 1 ? 0 : currentSlide + 1);
-      } else if (e.key === 'ArrowLeft') {
-        e.preventDefault();
-        handleSlideChange(currentSlide === 0 ? slides.length - 1 : currentSlide - 1);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentSlide, slides.length]);
-
-  useEffect(() => {
-    if (!isVisible) return;
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-    }, 6000);
-    return () => clearInterval(timer);
-  }, [isVisible, slides.length]);
-
-  const nextSlide = () => handleSlideChange(currentSlide === slides.length - 1 ? 0 : currentSlide + 1);
-  const prevSlide = () => handleSlideChange(currentSlide === 0 ? slides.length - 1 : currentSlide - 1);
-
   return (
-    <div id="services" ref={sectionRef} className="veggie-section w-full min-h-screen bg-transparent">
-      <section className="h-screen relative overflow-hidden">
-        {/* Background images */}
-        {slides.map((slide, index) => (
-          <div
-            key={slide.id}
-            className="absolute inset-0 slide-bg"
-            style={{
-              backgroundImage: `url(${slide.image})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              filter: 'grayscale(40%) brightness(0.5)',
-              opacity: index === currentSlide ? 1 : 0,
-              transform: index === currentSlide ? 'scale(1.02)' : 'scale(1.08)',
-              willChange: 'opacity, transform',
-              transition: 'opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 1.2s cubic-bezier(0.4,0,0.2,1)',
-            }}
-          />
-        ))}
+    <section
+      id="services"
+      ref={sectionRef}
+      className="w-full bg-transparent text-white section-padding relative overflow-hidden"
+    >
+      {/* Background accent */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div
+          className="absolute w-[600px] h-[600px] rounded-full blur-[160px] opacity-[0.05]"
+          style={{
+            background: 'radial-gradient(circle, rgba(139,92,246,0.6) 0%, transparent 70%)',
+            top: '10%',
+            left: '-15%',
+          }}
+        />
+        <div
+          className="absolute w-[500px] h-[500px] rounded-full blur-[140px] opacity-[0.04]"
+          style={{
+            background: 'radial-gradient(circle, rgba(236,72,153,0.5) 0%, transparent 70%)',
+            bottom: '10%',
+            right: '-10%',
+          }}
+        />
+      </div>
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/50 z-[1]" />
-
-        {/* Content */}
-        <div className="relative z-10 h-full flex items-center justify-center px-6 sm:px-8">
-          <div className="text-center max-w-4xl">
-            <p
-              className="text-xs sm:text-sm tracking-[0.3em] uppercase text-violet-400 font-semibold mb-4"
-              style={{
-                opacity: isAnimating ? 0 : 1,
-                transform: isAnimating ? 'translateY(-10px)' : 'translateY(0)',
-                transition: 'all 0.5s ease',
-              }}
-            >
-              {slides[currentSlide].subtitle}
-            </p>
-
-            <h2
-              className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-white mb-6 tracking-tight"
-              style={{
-                opacity: isAnimating ? 0 : 1,
-                transform: isAnimating ? 'translateY(30px)' : 'translateY(0)',
-                transition: 'all 0.6s cubic-bezier(0.23,1,0.32,1)',
-              }}
-            >
-              {slides[currentSlide].title}
-            </h2>
-
-            <p
-              className="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed mb-6"
-              style={{
-                opacity: isAnimating ? 0 : 1,
-                transform: isAnimating ? 'translateY(20px)' : 'translateY(0)',
-                transition: 'all 0.6s cubic-bezier(0.23,1,0.32,1) 0.1s',
-              }}
-            >
-              {slides[currentSlide].description}
-            </p>
-
-            <p
-              className="text-sm sm:text-base text-violet-300/70 font-mono mb-10"
-              style={{ opacity: isAnimating ? 0 : 1, transition: 'opacity 0.5s ease 0.15s' }}
-            >
-              {slides[currentSlide].tech}
-            </p>
-
-            {/* Dots */}
-            <div className="flex justify-center gap-2.5 mb-8">
-              {slides.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleSlideChange(index)}
-                  className={`h-2 rounded-full transition-all duration-500 ${
-                    index === currentSlide ? 'w-8 bg-violet-400' : 'w-2 bg-white/30 hover:bg-white/50'
-                  }`}
-                  aria-label={`Slide ${index + 1}`}
-                />
-              ))}
-            </div>
-
-            {/* Nav */}
-            <div className="flex justify-center gap-4">
-              <button
-                onClick={prevSlide}
-                className="btn-shimmer px-8 sm:px-10 py-3 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-xl transition-all duration-300 backdrop-blur-sm border border-white/10 hover:border-white/20 hover:scale-105 active:scale-95"
-              >
-                ← PREV
-              </button>
-              <button
-                onClick={nextSlide}
-                className="btn-shimmer px-8 sm:px-10 py-3 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-xl transition-all duration-300 backdrop-blur-sm border border-white/10 hover:border-white/20 hover:scale-105 active:scale-95"
-              >
-                NEXT →
-              </button>
-            </div>
-          </div>
+      <div className="max-w-6xl mx-auto relative z-10">
+        {/* Header */}
+        <div className="text-center mb-16 lg:mb-20">
+          <p className="text-xs sm:text-sm tracking-[0.3em] uppercase text-violet-400 font-semibold mb-4">
+            SERVICES & EXPERTISE
+          </p>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white mb-6">
+            What I{' '}
+            <span className="bg-gradient-to-r from-violet-400 to-pink-400 bg-clip-text text-transparent">
+              Deliver
+            </span>
+          </h2>
+          <p className="text-gray-400 text-base lg:text-lg max-w-2xl mx-auto">
+            Specialized solutions tailored to your needs, from robust backend systems and automated data pipelines to engaging modern frontends.
+          </p>
         </div>
 
-        {/* Counter */}
-        <div className="absolute bottom-6 right-6 sm:bottom-8 sm:right-8 z-20">
-          <span className="text-white/50 text-sm font-mono bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/5">
-            {String(currentSlide + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}
-          </span>
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
+          {services.map((service, idx) => {
+            const isVisible = visibleCards.has(idx);
+            // Make the first card span 2 columns on tablet/desktop if we want a bento-style look
+            const isFeatured = idx === 0 || idx === 3;
+            
+            return (
+              <div
+                key={service.id}
+                data-idx={idx}
+                ref={(el) => { cardRefs.current[idx] = el; }}
+                className={`group ${isFeatured ? 'md:col-span-2 lg:col-span-2' : ''}`}
+                style={{
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
+                  transition: `all 0.7s cubic-bezier(0.16,0.84,0.44,1) ${idx * 100}ms`,
+                }}
+              >
+                <div className="glass-card p-8 h-full flex flex-col justify-between hover:border-violet-500/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl relative overflow-hidden">
+                  
+                  {/* Subtle glowing background on hover */}
+                  <div 
+                    className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 pointer-events-none"
+                    style={{ background: `radial-gradient(circle at center, ${service.glow} 0%, transparent 70%)` }}
+                  />
+
+                  <div>
+                    <div className="flex items-start justify-between mb-6">
+                      <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${service.gradient} p-[1px] flex items-center justify-center`}>
+                        <div className="w-full h-full bg-[#030014] rounded-[15px] flex items-center justify-center text-2xl">
+                          {service.icon}
+                        </div>
+                      </div>
+                      <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+                        0{service.id}
+                      </span>
+                    </div>
+
+                    <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 group-hover:text-violet-300 transition-colors">
+                      {service.title}
+                    </h3>
+                    <p className="text-xs tracking-wider font-semibold text-violet-400 mb-4">
+                      {service.subtitle}
+                    </p>
+                    <p className="text-sm text-gray-400 leading-relaxed mb-8">
+                      {service.description}
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2">
+                    {service.tech.map((t, i) => (
+                      <span
+                        key={i}
+                        className="text-[11px] font-medium text-gray-300 bg-white/5 border border-white/10 px-3 py-1 rounded-full group-hover:border-white/20 transition-colors"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 

@@ -67,22 +67,6 @@ const experiences: ExperienceItem[] = [
     technologies: ['Python', 'Django', 'SQLite', 'HTML', 'CSS'],
     type: 'internship',
   },
-  {
-    id: 4,
-    period: 'Graduated July 2024',
-    role: 'Bachelor in Computer Application (BCA)',
-    company: 'East West School of Business Management',
-    location: 'Yelahanka, Bengaluru',
-    description:
-      'Graduated with a strong foundation in computer science, software engineering, and web technologies.',
-    highlights: [
-      'Computer Science fundamentals',
-      'Software engineering & web development',
-      'Data structures & algorithms',
-    ],
-    technologies: ['Data Structures', 'Algorithms', 'Web Development', 'Cloud Computing'],
-    type: 'education',
-  },
 ];
 
 const typeConfig: Record<string, { dot: string; badge: string; badgeText: string; glow: string }> = {
@@ -159,7 +143,7 @@ const Experience: React.FC = () => {
         {/* Section Header */}
         <div className="text-center mb-16 lg:mb-20">
           <p className="text-xs sm:text-sm tracking-[0.3em] uppercase text-violet-400 font-semibold mb-4">
-            EXPERIENCE & EDUCATION
+            EXPERIENCE
           </p>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white mb-6">
             My{' '}
@@ -168,7 +152,7 @@ const Experience: React.FC = () => {
             </span>
           </h2>
           <p className="text-gray-400 text-base lg:text-lg max-w-2xl mx-auto">
-            From learning the fundamentals at university to building production backends at scale — here's my professional path.
+            Building production backends at scale and delivering high-quality digital solutions — here's my professional path.
           </p>
         </div>
 

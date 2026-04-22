@@ -82,7 +82,7 @@ const AutoHorizontalScrollPortfolio: React.FC = () => {
       id: 1,
       title: 'Course Platform',
       description: 'Backend system for a designing course platform with Google Auth, user management, and secure API endpoints.',
-      bgColor: 'bg-gradient-to-br from-violet-600 to-indigo-900',
+      bgColor: 'bg-gradient-to-br from-violet-900 to-indigo-950 shadow-lg shadow-violet-500/10 border border-violet-500/20',
       tech: ['Python', 'FastAPI', 'MongoDB', 'Redis'],
       role: 'Backend Developer',
     },
@@ -90,7 +90,7 @@ const AutoHorizontalScrollPortfolio: React.FC = () => {
       id: 2,
       title: 'Merchandise Site',
       description: 'Full backend for e-commerce merchandise site with product management, authentication, and payment integrations.',
-      bgColor: 'bg-gradient-to-br from-emerald-600 to-teal-900',
+      bgColor: 'bg-gradient-to-br from-purple-900 to-violet-950 shadow-lg shadow-purple-500/10 border border-purple-500/20',
       tech: ['FastAPI', 'MongoDB', 'Google Auth', 'REST APIs'],
       role: 'Backend Developer',
     },
@@ -98,7 +98,7 @@ const AutoHorizontalScrollPortfolio: React.FC = () => {
       id: 3,
       title: 'Admission System',
       description: 'Student admission management system with registration, enrollment workflows, and admin dashboard.',
-      bgColor: 'bg-gradient-to-br from-sky-500 to-blue-900',
+      bgColor: 'bg-gradient-to-br from-indigo-900 to-slate-900 shadow-lg shadow-indigo-500/10 border border-indigo-500/20',
       tech: ['Python', 'Django', 'SQLite', 'HTML/CSS'],
       role: 'Backend Intern',
     },
@@ -106,7 +106,7 @@ const AutoHorizontalScrollPortfolio: React.FC = () => {
       id: 4,
       title: 'WordPress Sites',
       description: 'Custom WordPress themes and WooCommerce stores with SEO optimization, plugin integration, and performance tuning.',
-      bgColor: 'bg-gradient-to-br from-amber-500 to-orange-900',
+      bgColor: 'bg-gradient-to-br from-fuchsia-900 to-pink-950 shadow-lg shadow-fuchsia-500/10 border border-fuchsia-500/20',
       tech: ['WordPress', 'PHP', 'WooCommerce', 'SEO'],
       role: 'WordPress Developer',
     },
@@ -114,7 +114,7 @@ const AutoHorizontalScrollPortfolio: React.FC = () => {
       id: 5,
       title: 'Web Scraping',
       description: 'Advanced data extraction pipelines using Selectolax, BeautifulSoup, and automated scraping solutions.',
-      bgColor: 'bg-gradient-to-br from-pink-500 to-rose-900',
+      bgColor: 'bg-gradient-to-br from-violet-900 to-fuchsia-900 shadow-lg shadow-violet-500/10 border border-violet-500/20',
       tech: ['Python', 'Selectolax', 'BeautifulSoup', 'Selenium'],
       role: 'Data Engineer',
     },
@@ -150,7 +150,7 @@ const AutoHorizontalScrollPortfolio: React.FC = () => {
 
     let progress = 0;
     if (scrollY >= containerTop) {
-      progress = Math.max(0, Math.min(1, (scrollY - containerTop) / scrollHeight));
+      progress = Math.max(0, Math.min(1, (scrollY - containerTop) / (scrollHeight - viewportHeight)));
     }
 
     setScrollProgress(progress);

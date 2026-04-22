@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/header';
+import Loader from './components/Loader';
 import SpaceBackground from './components/SpaceBackground';
 import CreativeDesignerHero from './components/hero';
 import AboutHeroSection from './components/aboutme';
@@ -7,7 +8,6 @@ import AutoHorizontalScrollPortfolio from './components/projects';
 import VerticalConnectList from './components/skills';
 import VeggieTDesigner from './components/veggiedesigner';
 import Experience from './components/Experience';
-import Education from './components/Education';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import './App.css';
@@ -15,6 +15,7 @@ import './index.css';
 
 const App: React.FC = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,7 +30,9 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen text-white relative">
+    <>
+      {isLoading && <Loader onComplete={() => setIsLoading(false)} />}
+      <div className={`min-h-screen text-white relative transition-opacity duration-1000 ${isLoading ? 'opacity-0 h-screen overflow-hidden' : 'opacity-100'}`}>
       <SpaceBackground />
       <Header />
 
@@ -39,7 +42,6 @@ const App: React.FC = () => {
         <VerticalConnectList />
         <AutoHorizontalScrollPortfolio />
         <Experience />
-        <Education />
         <VeggieTDesigner />
         <Testimonials />
         <Contact />
@@ -58,6 +60,7 @@ const App: React.FC = () => {
         </svg>
       </button>
     </div>
+    </>
   );
 };
 
