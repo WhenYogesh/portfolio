@@ -218,7 +218,7 @@ const AboutHeroSection: React.FC = () => {
               With expertise in Python, I build scalable and efficient APIs using Django, FastAPI, and Flask. 
               Experienced in full-stack development with React frontends, WordPress & WIX sites, 
               web scraping, and cloud deployment — I bring a strong understanding of web development 
-              and problem-solving skills to deliver high-quality digital solutions.
+              and problem-solving skills to deliver high-quality digital solutions thats it.
             </p>
           </div>
 
